@@ -1,7 +1,7 @@
 {
-  "name": "openGym",
-  "short_name": "openGym",
-  "description": "Personal gym & body weight tracker",
+  "name": "Forge",
+  "short_name": "Forge",
+  "description": "Treinos, progresso e dieta em um só lugar",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

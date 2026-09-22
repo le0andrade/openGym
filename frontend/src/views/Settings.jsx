@@ -18,6 +18,7 @@ import { forgetCoach } from '../lib/coach-api.js'
 import { ConnectSheet } from './MobileOnboarding.jsx'
 import { starterPlanSheet, confirmSheet, importFromApp, importFromHevy, equipmentProfileSheet, menuSheet, askAddDeviceData } from '../sheets.jsx'
 import Icon from '../components/Icon.jsx'
+import { EXERCISE_MEDIA_ENABLED } from '../lib/forge.js'
 import { Section, Row, SelectRow, Switch, Segmented, Button, TextField } from '../components/ui.jsx'
 
 export default function Settings() {
@@ -309,12 +310,14 @@ export default function Settings() {
       {/* 'full'/'mini' is also what the tap-toggle on the workout animation writes; 'off' hides
           workout media entirely (library, detail sheet and picker thumbs are unaffected).
           Legacy/unknown values read as 'full'. */}
+      {EXERCISE_MEDIA_ENABLED && (
       <Row icon="figureRun" iconTint="var(--green)" title={t('Exercise animations')}>
         <Segmented className="seg-inline"
           options={[{ value: 'full', label: t('Full') }, { value: 'mini', label: t('Small') }, { value: 'off', label: t('Hidden') }]}
           value={S.gifSize === 'mini' || S.gifSize === 'off' ? S.gifSize : 'full'}
           onChange={v => update(s => { s.gifSize = v })} />
       </Row>
+      )}
       <Row icon="bell" iconTint="var(--pink)" title={t('Sounds')}>
         {/* Turning Sounds on is a tap: unlock the audio context now so a timer that ends before
             the next set check can already sound (iOS, #152). */}
