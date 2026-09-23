@@ -8,6 +8,9 @@ $Branch = 'forge-commercial'
 $ApiPort = 3000
 $FrontendPort = 5173
 $RepoRoot = $PSScriptRoot
+$ExerciseMediaRevision = '7455efae41b330c265e7cd4b78dfa848e7ce5ebd'
+$ExerciseImgBase = "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@$ExerciseMediaRevision/images/"
+$ExerciseGifBase = "https://cdn.jsdelivr.net/gh/hasaneyldrm/exercises-dataset@$ExerciseMediaRevision/videos/"
 
 function Write-Step([string]$Message) {
   Write-Host "`n==> $Message" -ForegroundColor Cyan
@@ -178,6 +181,8 @@ $frontendCommand = @"
 `$env:API_TARGET = 'http://127.0.0.1:$ApiPort'
 `$env:API_ORIGIN = '$PublicUrl'
 `$env:__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS = '$PublicHost'
+`$env:VITE_IMG_BASE = '$ExerciseImgBase'
+`$env:VITE_GIF_BASE = '$ExerciseGifBase'
 npm --prefix frontend run dev -- --host 127.0.0.1 --port $FrontendPort
 "@
 
@@ -200,6 +205,7 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "`nForge atualizado e rodando." -ForegroundColor Green
 Write-Host "Local:   http://127.0.0.1:$FrontendPort"
 Write-Host "Publico: $PublicUrl"
+Write-Host "Midia:   upstream openGym via jsDelivr (teste)"
 Write-Host "Commit:  $newHead"
 
 if (-not $NoOpen) {
