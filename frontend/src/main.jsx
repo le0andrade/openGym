@@ -14,6 +14,14 @@ createRoot(document.getElementById('root')).render(
 // Production web only. Registering the PWA worker while Vite is serving the app through a
 // development tunnel mixes cached shell assets with Vite's live module graph and can make remote
 // testing look like a real deployment. The native shell already serves everything from disk.
-if (import.meta.env.PROD && !MOBILE && 'serviceWorker' in navigator && location.protocol === 'https:') {
-  navigator.serviceWorker.register('sw.js').catch(() => {})
+if (!MOBILE && 'serviceWorker' in navigator) {
+  if (import.meta.env.PROD && location.protocol === 'https:') {
+    navigator.serviceWorker.register('sw.js').catch(() => {})
+  } else if (import.meta.env.DEV) {
+    // A browser that visited the HTTPS Funnel before this guard may already have the old worker.
+    // Remove it once so subsequent dev sessions are purely Vite-driven.
+    navigator.serviceWorker.getRegistrations()
+      .then(registrations => Promise.all(registrations.map(registration => registration.unregister())))
+      .catch(() => {})
+  }
 }
