@@ -17,9 +17,14 @@ display name is **Forge**.
 
 ## Exercise media
 
-The commercial Forge variant intentionally does **not** download or display the third-party
-exercise images/GIFs used by upstream openGym. Forge keeps the exercise metadata, names and
-instructions, while rendering neutral placeholders until independently licensed media is introduced.
+For the current product-testing phase, Forge temporarily displays the same exercise still images
+and GIF animations used by upstream openGym. The Windows development updater points Vite at the
+pinned `hasaneyldrm/exercises-dataset` media revision through jsDelivr, so those files are not
+committed to or redistributed from this repository.
+
+This is a development/testing decision only. The media is third-party content (upstream openGym
+attributes it to Gym visual), is not covered by Forge/openGym's AGPL licence, and must be reviewed
+or replaced before commercial production if the required rights are not independently secured.
 
 ## Upstream strategy
 
