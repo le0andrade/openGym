@@ -85,24 +85,24 @@ if (-not (Test-Path (Join-Path $RepoRoot '.git'))) {
   throw 'Este script precisa ser executado na raiz do repositorio Forge.'
 }
 
-Write-Step 'Verificando alteracoes locais'
-$dirty = (& git status --porcelain) -join "`n"
-if ($LASTEXITCODE -ne 0) { throw 'Nao foi possivel ler o status do Git.' }
-if ($dirty.Trim()) {
-  Write-Host $dirty
-  throw 'Existem alteracoes locais nao commitadas. O update foi cancelado para nao sobrescrever seu trabalho.'
-}
+Write-Step 'Sincronizando exatamente com o GitHub'
+$oldHead = (Run-Git rev-parse HEAD | Select-Object -First 1).Trim()
+
+# Este computador e ambiente de teste. O GitHub e a fonte da verdade.
+# reset --hard descarta alteracoes em arquivos rastreados.
+# clean -fd remove arquivos/pastas nao rastreados, mas preserva tudo que esta no .gitignore
+# (incluindo data/, node_modules e .env).
+Run-Git reset --hard HEAD | Out-Host
+Run-Git clean -fd | Out-Host
+Run-Git fetch origin $Branch | Out-Host
 
 $currentBranch = (Run-Git rev-parse --abbrev-ref HEAD | Select-Object -First 1).Trim()
 if ($currentBranch -ne $Branch) {
-  Write-Step "Mudando para a branch $Branch"
-  Run-Git switch $Branch | Out-Host
+  Run-Git switch -C $Branch "origin/$Branch" | Out-Host
 }
 
-$oldHead = (Run-Git rev-parse HEAD | Select-Object -First 1).Trim()
-
-Write-Step 'Buscando atualizacoes no GitHub'
-Run-Git pull --ff-only origin $Branch | Out-Host
+Run-Git reset --hard "origin/$Branch" | Out-Host
+Run-Git clean -fd | Out-Host
 $newHead = (Run-Git rev-parse HEAD | Select-Object -First 1).Trim()
 
 $changedFiles = @()
