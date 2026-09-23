@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { imgSrc, gifSrc } from '../lib/exercises.js'
 import { useStore } from '../store/useStore.js'
 import { t, exerciseNameFor } from '../lib/i18n.js'
 import Icon from './Icon.jsx'
 import { EXERCISE_MEDIA_ENABLED } from '../lib/forge.js'
+
+const FORGE_MEDIA_BOOT_KEY = 'forge_media_boot_v1'
 
 // Big autoplaying animation; tap toggles to the still frame. `compact` shrinks it (superset cards).
 // Custom exercises have no media — the animation stays blank by design (issue #11).
@@ -22,6 +24,20 @@ export default function Media({ ex, id, compact, minimizable }) {
   const [failed, setFailed] = useState(null)
   const gifSize = useStore(s => s.S.gifSize)
   const update = useStore(s => s.update)
+
+  // Forge previously defaulted media to off while third-party rights were being reviewed.
+  // For this testing phase, enable the full workout animation once per browser so an existing
+  // saved profile does not silently keep the old Forge default. After this one-time migration,
+  // the user's own Full / Mini / Off choice is respected normally.
+  useEffect(() => {
+    if (!EXERCISE_MEDIA_ENABLED || !minimizable || gifSize !== 'off') return
+    try {
+      if (localStorage.getItem(FORGE_MEDIA_BOOT_KEY) === '1') return
+      localStorage.setItem(FORGE_MEDIA_BOOT_KEY, '1')
+      update(s => { s.gifSize = 'full' })
+    } catch { /* storage unavailable: leave the saved preference untouched */ }
+  }, [gifSize, minimizable, update])
+
   if (!EXERCISE_MEDIA_ENABLED || !ex.gif) return null
   if (minimizable && gifSize === 'off') return null
   const mini = minimizable && gifSize === 'mini'
