@@ -12,6 +12,14 @@ const backend = process.env.API_TARGET || 'http://127.0.0.1:3000'
 const apiOrigin = process.env.API_ORIGIN || 'http://localhost:8080'
 const media = process.env.MEDIA_TARGET || 'http://127.0.0.1:8888'
 
+// Forge's Windows updater exposes this dev server through Tailscale Funnel. Vite HMR uses a
+// long-lived WebSocket; when a tunnel/proxy interrupts that socket, the Vite client treats the
+// reconnect as a dev-server restart and reloads the whole page. Remote phone testing does not
+// need HMR because update-forge.ps1 restarts Vite after every Git update, so disable HMR only for
+// *.ts.net sessions while preserving normal hot reload for direct local development.
+const allowedDevHost = process.env.__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS || ''
+const tailscaleFunnelDev = /\.ts\.net$/i.test(allowedDevHost)
+
 // Optional web analytics (Umami). Injected only when BOTH vars are set at build time,
 // so a plain `npm run build` — and every self-hosted install — stays telemetry-free.
 // Set for the public instance: VITE_UMAMI_SRC=https://stats.example/script.js VITE_UMAMI_ID=<uuid>
@@ -60,6 +68,7 @@ export default defineConfig({
     // and is imported by the phone build. vite build and vitest already reach it; the dev
     // server needs to be told the workspace is wider than frontend/.
     fs: { allow: ['..'] },
+    hmr: tailscaleFunnelDev ? false : undefined,
     proxy: {
       '/api': { target: backend, changeOrigin: true, headers: { Origin: apiOrigin } },
       '/img': { target: media, changeOrigin: true },
