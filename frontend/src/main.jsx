@@ -11,7 +11,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode><App /></StrictMode>
 )
 
-// Not in the mobile build: the native shell already serves everything from disk.
-if (!MOBILE && 'serviceWorker' in navigator && location.protocol === 'https:') {
+// Production web only. Registering the PWA worker while Vite is serving the app through a
+// development tunnel mixes cached shell assets with Vite's live module graph and can make remote
+// testing look like a real deployment. The native shell already serves everything from disk.
+if (import.meta.env.PROD && !MOBILE && 'serviceWorker' in navigator && location.protocol === 'https:') {
   navigator.serviceWorker.register('sw.js').catch(() => {})
 }
