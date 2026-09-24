@@ -4,7 +4,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$Branch = 'forge-commercial'
+$Branch = 'summer-shredded'
 $ApiPort = 3000
 $FrontendPort = 5173
 $RepoRoot = $PSScriptRoot
@@ -203,6 +203,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host "`nForge atualizado e rodando." -ForegroundColor Green
+Write-Host "Branch:  $Branch"
 Write-Host "Local:   http://127.0.0.1:$FrontendPort"
 Write-Host "Publico: $PublicUrl"
 Write-Host "Midia:   upstream openGym via jsDelivr (teste)"
