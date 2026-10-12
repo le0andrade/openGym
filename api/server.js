@@ -19,6 +19,7 @@ import { startCadence } from './coach/cadence.js';
 import { startWarmup } from './coach/warmup.js';
 import { dayReminderPush, restTimerPush, testPush } from './push-messages.js';
 import { verifyError } from './verify-error.js';
+import { summerShreddedRoutes } from './summer-shredded/content-store.js';
 
 const PORT = +(process.env.PORT || 3000);
 const DATA = process.env.DATA_DIR || '/data';
@@ -1190,6 +1191,9 @@ const routes = {
     audit(req, 'admin.audit.clear', { user: admin });
     json(res, 200, { ok: true });
   },
+
+  /* ---------- Summer Shredded global product content ---------- */
+  ...summerShreddedRoutes({ dataDir: DATA, json, readBody, readSession, requireAdmin, audit }),
 
   /* ---------- AI Coach ---------- */
   // Routes live in coach/routes.js and are handed the helpers above rather than importing
