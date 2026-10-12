@@ -56,20 +56,46 @@ export function equipmentOf(list) {
   return Object.keys(c).sort((a, b) => c[b] - c[a] || (a < b ? -1 : 1))
 }
 
-// Custom (user-created) exercises live in synced state S.customEx (issue #11) and are
-// merged into the id index here so every EXIDX[id] lookup keeps working unchanged.
+// Custom exercise layers share EXIDX with the built-in catalogue. Product-owned exercises
+// (Summer Shredded) are global content from the backend; user-created exercises are profile data.
+// Keep their id sets separate so refreshing one layer never deletes the other.
 let customIds = []
+let productIds = []
+
+const restoreBuiltInOrDelete = id => {
+  delete EXIDX[id]
+  const builtIn = CATALOGUE.find(ex => ex.id === id)
+  if (builtIn) EXIDX[id] = builtIn
+}
+
+export function registerProductExercises(list) {
+  productIds.forEach(id => {
+    // A profile custom with the same id, if one somehow exists, keeps priority.
+    if (!customIds.includes(id)) restoreBuiltInOrDelete(id)
+  })
+  productIds = (list || []).map(e => e.id)
+  ;(list || []).forEach(e => {
+    if (!customIds.includes(e.id)) EXIDX[e.id] = e
+  })
+}
+
 export function registerCustom(list) {
   customIds.forEach(id => {
-    delete EXIDX[id]
-    const builtIn = CATALOGUE.find(ex => ex.id === id)
-    if (builtIn) EXIDX[id] = builtIn
+    const product = productIds.includes(id)
+    if (product) return
+    restoreBuiltInOrDelete(id)
   })
   customIds = (list || []).map(e => e.id)
   ;(list || []).forEach(e => { EXIDX[e.id] = e })
 }
-// Full searchable catalogue — customs first so your own exercises are easy to find.
-export const allExercises = st => [...(st.customEx || []), ...CATALOGUE]
+
+// Full searchable catalogue. Product exercises are available to product/admin surfaces while
+// profile customs keep their historical priority in generic openGym callers.
+export const allExercises = st => [
+  ...(st.customEx || []),
+  ...productIds.map(id => EXIDX[id]).filter(Boolean).filter(ex => !(st.customEx || []).some(c => c.id === ex.id)),
+  ...CATALOGUE
+]
 
 function searchableText(value) {
   if (Array.isArray(value)) return value.map(searchableText).join(' ')
