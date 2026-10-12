@@ -115,7 +115,9 @@ export const SUMMER_SHREDDED_PROGRAMS = Object.freeze([
             note: 'Usar limitador',
             technique: 'dead-stop'
           }),
-          catalogue('Cross Over', '1269', 'cable standing up straight crossovers'),
+          catalogue('Cross Over', '1269', 'cable standing up straight crossovers', 'equivalent', {
+            note: 'Pico de contração 2"'
+          }),
           catalogue('Cross Over Reverso', '0225', 'cable standing cross-over high reverse fly')
         ]
       },
