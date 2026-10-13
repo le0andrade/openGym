@@ -23,7 +23,7 @@ O protocolo da página 17 exige novo peso na semana 7. Semanas 10 e 11 não espe
 Preencha no ambiente do servidor, sem colocar credenciais no Git:
 
 - `KIWIFY_WEBHOOK_SECRET`: segredo próprio do receptor, com pelo menos 32 caracteres aleatórios.
-- `KIWIFY_PRODUCT_MAP`: JSON com IDs reais de produtos. Cada valor é `choice` (escolha única entre os dois programas), `masculino` ou `feminino` (atribuição automática sem reiniciar a data existente).
+- `KIWIFY_PRODUCT_MAP`: JSON com IDs reais de produtos. O Summer Shredded será um único pacote com valor `choice`: escolha no primeiro acesso e troca posterior entre Masculino/Feminino no painel do aluno. A troca mantém data de início, semana, histórico, alimentação e eventual treino em andamento. O ID ainda será definido pelo produtor; não existe produto real configurado. Os valores `masculino` e `feminino` também são aceitos pela infraestrutura para atribuição fixa, mas não são o modelo comercial escolhido.
 - `RESEND_API_KEY` e `SUMMER_EMAIL_FROM`: envio transacional com remetente verificado.
 - `NODE_ENV=production`; mantenha `SUMMER_ACCESS_MODE` vazio. `development` habilita acesso local apenas fora de produção.
 

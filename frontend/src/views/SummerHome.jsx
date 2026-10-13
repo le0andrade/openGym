@@ -5,6 +5,7 @@ import { nav } from '../lib/nav.js'
 import { Button } from '../components/ui.jsx'
 import Icon from '../components/Icon.jsx'
 import { todayISO } from '../lib/format.js'
+import { confirmSheet } from '../sheets.jsx'
 
 export default function SummerHome() {
   const user = useStore(s => s.user)
@@ -17,12 +18,13 @@ export default function SummerHome() {
   useEffect(() => { setUpdated(null) }, [loaded.data])
   const content = updated || loaded.data
   const { program, week, slug, setSlug, setWeek } = useSummerSelection(content, user)
+  useEffect(() => { if (program) setChoice(program.slug) }, [program?.slug])
   const [expanded, setExpanded] = useState(null)
   const [cardioOption, setCardioOption] = useState(0)
   const start = workout => startSummerWorkout(program, workout, week)
   const enroll = async () => {
     setBusy(true); setFailure(null)
-    try { setUpdated(await enrollSummerProgram(choice)) }
+    try { setUpdated(await enrollSummerProgram(choice)); setExpanded(null); setCardioOption(0) }
     catch { setFailure('Não foi possível salvar seu programa. Tente novamente.') }
     finally { setBusy(false) }
   }
@@ -40,6 +42,15 @@ export default function SummerHome() {
       <Button variant="primary" disabled={busy} onClick={enroll}>{busy ? 'Salvando…' : 'Começar meu programa'}</Button>
     </div>}
     {program && <>
+      {!user?.admin && content.programs.length > 1 && <section className="card">
+        <h2>Seu programa</h2>
+        <label>Programa de treino<select className="input" value={choice} onChange={e=>setChoice(e.target.value)}>
+          {content.programs.map(p=><option key={p.slug} value={p.slug}>{p.slug==='masculino'?'Masculino':'Feminino'}</option>)}
+        </select></label>
+        <p className="small muted">Você pode trocar entre Masculino e Feminino mantendo a semana atual, o histórico e sua alimentação. Um treino em andamento mantém o programa de origem.</p>
+        {failure && <p role="alert">{failure}</p>}
+        <Button disabled={busy || choice===program.slug} onClick={()=>confirmSheet({title:'Trocar programa?',message:'A semana atual e seus registros serão preservados.',confirmText:'Trocar programa',onConfirm:enroll})}>{busy?'Salvando…':'Trocar programa'}</Button>
+      </section>}
       {user?.admin && <div className="card"><h2>Prévia do produtor</h2>
         <label>Programa<select className="input" value={slug} onChange={e => setSlug(e.target.value)}><option value="masculino">Masculino</option><option value="feminino">Feminino</option></select></label>
         <label>Semana<select className="input" value={week} onChange={e => setWeek(Number(e.target.value))}>{Array.from({ length: 12 }, (_, i) => <option key={i} value={i+1}>{i+1}</option>)}</select></label>

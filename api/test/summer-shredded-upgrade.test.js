@@ -50,11 +50,17 @@ test('week advances by São Paulo calendar days and clamps to weeks 1 through 12
  assert.equal(selectionFor(e,'2027-01-05').completed,true)
  assert.equal(productDate(new Date('2026-10-14T01:00:00Z')),'2026-10-13')
 })
-test('enrollment persists across devices and cannot be restarted or switched by student',()=>withDir(dir=>{
+test('program switching persists across devices without restarting the enrollment',()=>withDir(dir=>{
  const store=createEnrollmentStore(dir);const enrolled=store.enroll('student','feminino',new Date('2026-10-13T12:00Z'))
  assert.deepEqual(createEnrollmentStore(dir).read('student'),enrolled)
  assert.deepEqual(store.enroll('student','feminino',new Date('2026-11-01T12:00Z')),enrolled)
- assert.throws(()=>store.enroll('student','masculino'),/already selected/)
+ const history=path.join(dir,'state-student.json'), saved=JSON.stringify({workouts:[{programId:'summer-feminino',programWeek:3}],summerNutrition:{week7Weight:72}})
+ fs.writeFileSync(history,saved)
+ const switched=store.enroll('student','masculino',new Date('2026-11-01T12:00Z'))
+ assert.equal(switched.startedOn,enrolled.startedOn);assert.equal(switched.programSlug,'masculino')
+ assert.equal(selectionFor(switched,'2026-11-01').week,3)
+ assert.deepEqual(createEnrollmentStore(dir).read('student'),switched)
+ assert.equal(fs.readFileSync(history,'utf8'),saved)
  assert.throws(()=>store.enroll('other','other'),/invalid program/)
  assert.equal(store.read('other'),null)
 }))
@@ -68,7 +74,9 @@ test('content/enrollment routes require login and never accept client supplied w
  user={id:'student'}
  await routes['POST /api/summer-shredded/enrollment']({},{});assert.equal(result.data.selection.week,1);assert.equal(result.data.selection.startedOn,productDate())
  await routes['GET /api/summer-shredded/content']({},{});assert.equal(result.data.selection.programSlug,'feminino')
- body={programSlug:'masculino'};await routes['POST /api/summer-shredded/enrollment']({},{});assert.equal(result.status,409)
+ const start=result.data.selection.startedOn
+ body={programSlug:'masculino',week:12,startedOn:'2020-01-01'};await routes['POST /api/summer-shredded/enrollment']({},{});assert.equal(result.status,200)
+ assert.equal(result.data.selection.startedOn,start);assert.equal(result.data.selection.week,1)
  }finally{fs.rmSync(dir,{recursive:true,force:true})}
 })
 

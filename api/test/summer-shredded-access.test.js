@@ -100,3 +100,17 @@ test('draft revision prevents overwrites and validates nutrition before publicat
  invalid.nutritionProtocol=draft.nutritionProtocol;invalid.programs[0].workouts[0].exercises[0].prescription[0]='2x10junk';assert.throws(()=>validateProductContent(invalid),/prescription/)
  }finally{fs.rmSync(dir,{recursive:true,force:true})}
 })
+test('one package allows subsequent program switches but revoked access cannot switch',async()=>{
+ const dir=dirFor();try{
+ let body={programSlug:'feminino'},out;const user={id:'student'}
+ const context={dataDir:dir,env,json:(r,status,data)=>{out={status,data}},readBody:async()=>body,readSession:()=>user,isAdmin:()=>false}
+ const access=accessRoutes(context),purchase=order();access.store.event(purchase)
+ const c=access.store.challenge(user.id,'buyer@example.test');access.store.verify(user.id,c.id,c.code)
+ const routes=summerShreddedRoutes({...context,requireAdmin:()=>null,requireAccess:access.requireAccess})
+ await routes['POST /api/summer-shredded/enrollment']({},{});assert.equal(out.status,200);const start=out.data.selection.startedOn
+ body={programSlug:'masculino',startedOn:'2030-01-01',week:12}
+ await routes['POST /api/summer-shredded/enrollment']({},{});assert.equal(out.status,200);assert.equal(out.data.selection.startedOn,start);assert.equal(out.data.selection.programSlug,'masculino')
+ access.store.event({...purchase,order_status:'refunded',webhook_event_type:'order_refunded'})
+ body={programSlug:'feminino'};await routes['POST /api/summer-shredded/enrollment']({},{});assert.equal(out.status,403)
+ }finally{fs.rmSync(dir,{recursive:true,force:true})}
+})

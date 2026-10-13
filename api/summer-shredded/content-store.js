@@ -253,7 +253,7 @@ export function summerShreddedRoutes({ dataDir, json, readBody, readSession, req
       try {
         const selection = selectionFor(enrollments.enroll(user.id, body.programSlug))
         json(res, 200, { selection })
-      } catch (e) { json(res, e.message === 'program already selected' ? 409 : 400, { error: e.message }) }
+      } catch (e) { json(res, 400, { error: e.message }) }
     },
 
     'GET /api/admin/summer-shredded/content': async (req, res) => {

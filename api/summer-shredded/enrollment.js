@@ -22,8 +22,11 @@ export function createEnrollmentStore(dataDir) {
     if (!['masculino', 'feminino'].includes(slug)) throw new Error('invalid program')
     const existing = read(uid)
     if (existing) {
-      if (existing.programSlug !== slug) throw new Error('program already selected')
-      return existing
+      if (existing.programSlug === slug) return existing
+      const value = { ...existing, programSlug: slug }
+      fs.writeFileSync(file(uid) + '.tmp', JSON.stringify(value), { mode: 0o600 })
+      fs.renameSync(file(uid) + '.tmp', file(uid))
+      return value
     }
     const value = { programSlug: slug, startedOn: productDate(at), source: 'onboarding' }
     fs.writeFileSync(file(uid), JSON.stringify(value), { flag: 'wx', mode: 0o600 })
