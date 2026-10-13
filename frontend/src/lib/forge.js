@@ -1,7 +1,7 @@
 // Forge commercial variant configuration.
 //
 // Keep product-specific defaults here so upstream openGym changes stay easy to merge.
-export const BRAND_NAME = 'Forge'
+export const BRAND_NAME = 'Summer Shredded'
 export const DEFAULT_LANG = 'pt-BR'
 
 // Temporarily enabled so the Forge product can be tested with the same exercise imagery and

@@ -1,7 +1,7 @@
 import { supersetUnits } from './history.js'
 
 function moveTarget(active, index, direction) {
-  if (!active || !Array.isArray(active.entries) || (direction !== -1 && direction !== 1)) return null
+  if (!active || active.lockedProgram || !Array.isArray(active.entries) || (direction !== -1 && direction !== 1)) return null
   const units = supersetUnits(active.entries)
   const source = units.findIndex(unit => unit.includes(index))
   const target = source + direction

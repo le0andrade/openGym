@@ -93,8 +93,8 @@ Exact significa correspondência do movimento base, não aprovação profissiona
 
 canonical-data.js é o seed versionado usado pela API. programs.js mantém exports compatíveis. exdb-index.json permite validação no backend sem depender dos arquivos do frontend; o teste compara o índice com toda a EXDB.
 
-Instalações existentes conservam conteúdo publicado e rascunho. Este commit não migra nem sobrescreve dados do produtor. Para adotar v2, compare o conteúdo existente, incorpore as correções no rascunho pela API administrativa e publique após revisão. IDs antigos inválidos serão rejeitados na próxima gravação/publicação; não apague o arquivo de conteúdo para forçar reseed. Histórico de execução não foi migrado.
+Na leitura inicial, migration.js reconcilia publicado e rascunho contra o seed anterior: apenas campos ainda iguais à base recebem correções. Edições, ordem, adições e remoções do produtor são preservadas. O arquivo original é guardado em summer-shredded-content.json.pre-v2-backup; catalogueMigration registra conflitos e camadas bloqueadas. Conteúdo inválido não é substituído nem servido ao aluno. O produtor deve corrigir o rascunho e publicar pela API administrativa. Histórico de execução não é alterado. Não apague o arquivo para forçar reseed.
 
-O Dockerfile passa a incluir summer-shredded, necessário para resolver os imports da API. Build Docker e fluxo completo no navegador não foram executados nesta auditoria.
+O Dockerfile passa a incluir summer-shredded, necessário para resolver os imports da API. Build Docker não executado. O fluxo do aluno foi validado no navegador com conta de teste, incluindo início, registro, conclusão antecipada e persistência após recarregar; detalhes em SUMMER_SHREDDED.md.
 
 Regerar relatório: `node scripts/summer-shredded/catalogue-report.mjs`. Validar: `node --test api/test/summer-shredded-*.test.js`.

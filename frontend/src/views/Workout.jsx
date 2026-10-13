@@ -21,42 +21,12 @@ import { progressionGuidance } from '../lib/progression-copy.js'
 import { glyphOf } from '../lib/glyphs.js'
 import { isWarmupRow, isDropSet, isRestPauseSet, dropsOf, clustersOf, addDrop, addCluster, removeDropAt, removeClusterAt, setDropAt, setClusterAt, nextDropWeight, nextBurstReps, isSideSet, makeSideSet, setSideField, toggleSide, addSideDrop, removeSideDropAt, setSideDropAt, addSideCluster, removeSideClusterAt, setSideClusterAt } from '../lib/workout-model.js'
 import { canMoveActiveWorkoutUnit, moveActiveWorkoutUnit } from '../lib/active-workout-order.js'
+import SummerHome from './SummerHome.jsx'
 import { MUSCLE_NAME } from '../lib/muscles.js'
 
 const SWIPE_MIN_DISTANCE = 48
 const SWIPE_AXIS_RATIO = 1.25
 const SWIPE_IGNORED_TARGETS = 'button,input,textarea,select,a,[role="button"],[role="checkbox"],[role="switch"],[role="slider"],[contenteditable="true"],.exmedia,[data-swipe-ignore]'
-
-/* ---------- start chooser (no active workout) ---------- */
-function StartChooser() {
-  const nav = useNavigate()
-  const S = useStore(s => s.S)
-  const todayIds = effectiveRoutineIds(S, todayISO())
-  const todayRoutines = effectiveRoutines(S, todayISO())
-  const todayName = todayRoutines.map(r => r.name).join(' + ')
-  const todayOvr = S.dayPlan[todayISO()] !== undefined
-  const idSet = new Set(todayIds)
-  const others = S.routines.filter(r => !idSet.has(r.id))
-  return <div className="narrow">
-    <div className="hdr"><div><h1>{t('Start workout')}</h1><div className="sub">{t(DAYN[new Date().getDay()])} — {todayRoutines.length ? t('today is {0}', todayName) : t('rest day, but no one’s stopping you')}</div></div></div>
-    {todayRoutines.length > 0 && <div className="card" style={{ borderColor: 'var(--acc)' }}>
-      <h2 className="accent">{t("Today's plan")}{todayOvr ? ' · ' + t('rescheduled') : ''}</h2>
-      <div className="row between" style={{ marginBottom: 12 }}>
-        <div><div className="big">{todayName}</div><div className="muted small">{exCount(todayRoutines.reduce((n, r) => n + r.ex.length, 0))}</div></div>
-        <span className="lrow-i" style={{ width: 38, height: 38, borderRadius: 9, fontSize: 22 }}><Icon name={glyphOf(todayRoutines[0].emoji)} /></span>
-      </div>
-      <Button variant="primary" icon="play" onClick={() => startFlow(todayIds)}>{t('Start {0}', todayName)}</Button>
-    </div>}
-    {others.length > 0 && <><h4 className="sec">{t('Other routines')}</h4>
-      <div className="list">{others.map(r => <div key={r.id} className="item" onClick={() => startFlow([r.id])}>
-        <span className="lrow-i"><Icon name={glyphOf(r.emoji)} /></span>
-        <div className="grow"><div className="tt">{r.name}</div><div className="ss">{exCount(r.ex.length)}</div></div>
-        <span className="tag acc">{t('Start')}</span></div>)}</div></>}
-    <div style={{ height: 14 }} />
-    <Button icon="shuffle" onClick={() => startFlow([])}>{t('Freestyle workout (pick as you go)')}</Button>
-    {!S.routines.length && <><div style={{ height: 10 }} /><Button variant="primary" onClick={() => nav('/plan')}>{t('Build a plan first')}</Button></>}
-  </div>
-}
 
 /* ---------- elapsed clock (isolated so the workout tree doesn't re-render every second) ---------- */
 function Elapsed({ start }) {
@@ -78,6 +48,7 @@ function ExerciseBlock({ entryIdx, compact, dense, onToggle, onToggleSide, onFie
   const update = useStore(s => s.update)
   const working = useUI(s => s.work)
   const entry = S.active.entries[entryIdx]
+  const locked = !!S.active.lockedProgram
   // Drops/bursts mutate the row in place — same card, not a new set with its own long rest.
   // A planned exercise (see the exercise's "Intensifier" config) arrives with these already
   // filled in by applyIntensifierPlan; these only add/edit/remove entries live from here on.
@@ -215,14 +186,14 @@ function ExerciseBlock({ entryIdx, compact, dense, onToggle, onToggleSide, onFie
     return { bar, text: t('Bar {0}', fmtNum(bar) + ' ' + S.unit) + (perSide ? ' · ' + perSide : '') }
   })() : null
   const openMore = () => menuSheet({
-    title: exerciseNameFor(ex),
+    title: entry.displayName || exerciseNameFor(ex),
     items: [
       { icon: 'pencil', label: entry.note ? t('Edit note') : t('Add note'), sub: entry.note || undefined, onClick: () => exerciseNoteSheet(entryIdx) },
       { icon: 'info', label: t('Details'), onClick: () => exerciseDetailSheet(ex) },
       { icon: 'history', label: t('History'), sub: last ? t('Last time') + ' ' + fmtDate(last.d) : undefined, onClick: () => exerciseHistorySheet(entry.id) },
       onProgressionSettings && { icon: 'chartLine', label: t('Progression settings'), sub: guidance ? t(guidance.policyLabel) : undefined, onClick: onProgressionSettings },
       barInfo && { icon: 'barbell', label: t('Bar weight'), sub: barInfo.text, onClick: () => barWeightSheet(entry.id) },
-      { icon: 'flame', label: t('Add warm-up set'), onClick: onAddWarmup },
+      !locked && { icon: 'flame', label: t('Add warm-up set'), onClick: onAddWarmup },
       onPairPrev && { icon: 'link', label: t('Make superset with previous'), onClick: onPairPrev },
       onPairNext && { icon: 'link', label: t('Make superset with next'), onClick: onPairNext },
       onSwap && { icon: 'shuffle', label: t('Swap exercise'), onClick: onSwap, disabled: busy },
@@ -239,9 +210,9 @@ function ExerciseBlock({ entryIdx, compact, dense, onToggle, onToggleSide, onFie
       title: (warm ? t('Warm-up') : t('Set {0}', entry.sets.slice(0, i + 1).filter(x => isWarmupRow(x) === warm).length)),
       subtitle: setLabel(entry.id, s, entry.target),
       items: [
-        !warm && mode === 'reps' && !isRestPauseSet(s) && { icon: 'arrowDown', label: t('Drop set'), sub: t('+ Drop'), onClick: () => addDropRow(i) },
-        !warm && mode === 'reps' && !isDropSet(s) && { icon: 'bolt', label: t('Rest-pause burst'), sub: t('+ Burst'), onClick: () => addBurstRow(i) },
-        { icon: 'trash', label: t('Remove this set'), danger: true, disabled: entry.sets.length <= 1, onClick: () => onRemoveSetAt(i) },
+        !locked && !warm && mode === 'reps' && !isRestPauseSet(s) && { icon: 'arrowDown', label: t('Drop set'), sub: t('+ Drop'), onClick: () => addDropRow(i) },
+        (!locked || entry.producerTechnique === 'rest-pause') && !warm && mode === 'reps' && !isDropSet(s) && { icon: 'bolt', label: t('Rest-pause burst'), sub: t('+ Burst'), onClick: () => addBurstRow(i) },
+        !locked && { icon: 'trash', label: t('Remove this set'), danger: true, disabled: entry.sets.length <= 1, onClick: () => onRemoveSetAt(i) },
       ],
     })
   }
@@ -368,17 +339,21 @@ function ExerciseBlock({ entryIdx, compact, dense, onToggle, onToggleSide, onFie
   return <>
     {!dense && <Media ex={ex} key={entry.id} compact={compact} minimizable />}
     <div className="row between" style={{ marginBottom: 6 }}>
-      <div style={{ fontSize: (compact || dense) ? 17 : 20, fontWeight: 600, letterSpacing: '-.02em', textTransform: 'capitalize', lineHeight: 1.2 }}>{exerciseNameFor(ex)}</div>
+      <div style={{ fontSize: (compact || dense) ? 17 : 20, fontWeight: 600, letterSpacing: '-.02em', textTransform: 'capitalize', lineHeight: 1.2 }}>{entry.displayName || exerciseNameFor(ex)}</div>
       <div className="row" style={{ gap: 2, flex: 'none' }}>
         {entry.note && <button className="iconbtn" aria-label={t('Note')} title={t('Note')} style={{ color: 'var(--acc)' }}
           onClick={() => exerciseNoteSheet(entryIdx)}><Icon name="pencil" /></button>}
         <button className="iconbtn" aria-label={t('More')} title={t('More')} onClick={openMore}><Icon name="more" /></button>
       </div>
     </div>
-    {wc.pairButtons && !compact && !dense && (onPairPrev || onPairNext) && <div className="row" style={{ gap: 6, flexWrap: 'wrap', marginBottom: 8 }}>
+    {!locked && wc.pairButtons && !compact && !dense && (onPairPrev || onPairNext) && <div className="row" style={{ gap: 6, flexWrap: 'wrap', marginBottom: 8 }}>
       {onPairPrev && <Button size="xs" variant="tinted" icon="link" title={t('Make superset with previous')} onClick={onPairPrev}>{t('Make superset with previous')}</Button>}
       {onPairNext && <Button size="xs" variant="tinted" icon="link" title={t('Make superset with next')} onClick={onPairNext}>{t('Make superset with next')}</Button>}
     </div>}
+    {entry.sourcePrescription && <div className="exnote"><strong>Prescrição: {entry.sourcePrescription}</strong></div>}
+    {entry.producerTechnique && <div className="exnote">{entry.producerTechnique === 'rest-pause' ? 'Rest-pause: faça o máximo de repetições, descanse 10 segundos e continue a contagem até completar.' : 'Dead stop: pause a carga no limitador e inicie cada repetição a partir da inércia.'}</div>}
+    {entry.producerNote && <div className="exnote">{entry.producerNote}</div>}
+    {locked && !ex.img && !ex.gif && <div className="small muted">Demonstração ainda não disponível.</div>}
     {/* compact view drops everything from here to the sets card — it is all still on the ⋯ menu
         (note, details, history, bar weight, progression) or is display-only (tags, "last time"). */}
     {!dense && <>
@@ -434,7 +409,7 @@ function ExerciseBlock({ entryIdx, compact, dense, onToggle, onToggleSide, onFie
             // Unilateral work set: the number sits beside a two-row L/R stack, each side logged
             // and ticked on its own (issue #60).
             <div ref={el => onSetRowRef?.(i, el)} className={'setrow-side' + (s.done ? ' done' : '')}>
-              <button type="button" className="n" aria-label={t('Set {0}', phaseNum)} title={t('More')} onClick={() => openSetMenu(s, i)}>{phaseNum}</button>
+              <button type="button" className="n" aria-label={t('Set {0}', phaseNum)} title={t('More')} disabled={locked && entry.producerTechnique !== 'rest-pause'} onClick={() => openSetMenu(s, i)}>{phaseNum}</button>
               <div className="side-rows">
                 {sideRow(s, i, 'L', col1, col2, col3)}
                 {sideExtras(s, i, 'L')}
@@ -444,7 +419,7 @@ function ExerciseBlock({ entryIdx, compact, dense, onToggle, onToggleSide, onFie
             </div>
           ) : (
           <div ref={el => onSetRowRef?.(i, el)} className={'setrow' + (s.done ? ' done' : '') + (col3 ? ' eff3' : '') + (timed ? ' timed' : '')}>
-            <button type="button" className="n" aria-label={t('Set {0}', phaseNum)} title={t('More')} onClick={() => openSetMenu(s, i)}>{phaseNum}</button>
+            <button type="button" className="n" aria-label={t('Set {0}', phaseNum)} title={t('More')} disabled={locked && entry.producerTechnique !== 'rest-pause'} onClick={() => openSetMenu(s, i)}>{phaseNum}</button>
             {cell(s, i, col1, 'w')}
             {col2 && cell(s, i, col2, 'r')}
             {col3 && effortCell(s, i, col3)}
@@ -475,7 +450,7 @@ function ExerciseBlock({ entryIdx, compact, dense, onToggle, onToggleSide, onFie
                 <button className="iconbtn" aria-label={t('Remove burst')} onClick={() => removeCluster(i, ci)}><Icon name="xmark" /></button>
               </div>
             ))}
-            {wc.setShortcuts && <div className="setextra">
+            {!locked && wc.setShortcuts && <div className="setextra">
               {!isRestPauseSet(s) && <button className="chip add" onClick={() => addDropRow(i)}><Icon name="arrowDown" />{t('+ Drop')}</button>}
               {!isDropSet(s) && <button className="chip add" onClick={() => addBurstRow(i)}><Icon name="bolt" />{t('+ Burst')}</button>}
             </div>}
@@ -483,17 +458,18 @@ function ExerciseBlock({ entryIdx, compact, dense, onToggle, onToggleSide, onFie
         </div>
       })}
       <div style={{ height: 8 }} />
-      {wc.setShortcuts ? <div className="row" style={{ flexWrap: 'wrap' }}>
+      {!locked && (wc.setShortcuts ? <div className="row" style={{ flexWrap: 'wrap' }}>
         <Button size="sm" icon="flame" onClick={onAddWarmup}>{t('Add warm-up set')}</Button>
         <Button size="sm" icon="minus" disabled={entry.sets.length <= 1} onClick={onRemoveSet}>{t('Remove set')}</Button>
         <Button size="sm" icon="plus" onClick={onAddSet}>{t('Add set')}</Button>
-      </div> : <Button size="sm" icon="plus" onClick={onAddSet}>{t('Add set')}</Button>}
+      </div> : <Button size="sm" icon="plus" onClick={onAddSet}>{t('Add set')}</Button>)}
     </div>
   </>
 }
 
 /* ---------- active workout ---------- */
 export function removeActiveExercise(idx) {
+  if (useStore.getState().S.active?.lockedProgram) return
   // Clear the work callback before indexes can shift. This also protects a confirmation sheet
   // that was opened first and confirmed after a timed hold started.
   useUI.getState().stopWork()
@@ -520,6 +496,7 @@ function ActiveWorkout() {
   const update = useStore(s => s.update)
   const { startRest: liveRest, stopRest, stopWork, work } = useUI()
   const A = S.active
+  const locked = !!A.lockedProgram
   // A past workout has no rest to time — the sets were done days ago. The work timer for
   // timed sets stays, since counting a hold is how its duration gets entered.
   const startRest = A.backfill ? () => {} : liveRest
@@ -693,12 +670,12 @@ function ActiveWorkout() {
   // exercise-level actions (swap, move, remove) address the entry itself, so the "more" menu of
   // a superset member acts on that member, not on whatever the marker happens to point at.
   const blockProps = idx => ({
-    onSwap: () => swapActiveWorkoutExercise(idx),
-    onMoveUp: () => moveUnitAt(idx, -1),
-    onMoveDown: () => moveUnitAt(idx, 1),
+    onSwap: locked ? undefined : () => swapActiveWorkoutExercise(idx),
+    onMoveUp: locked ? undefined : () => moveUnitAt(idx, -1),
+    onMoveDown: locked ? undefined : () => moveUnitAt(idx, 1),
     canMoveUp: canMoveActiveWorkoutUnit(A, idx, -1),
     canMoveDown: canMoveActiveWorkoutUnit(A, idx, 1),
-    onRemoveExercise: () => confirmRemoveExercise(idx),
+    onRemoveExercise: locked ? undefined : () => confirmRemoveExercise(idx),
     busy: !!work,
     onToggle: i => toggle(idx, i),
     onToggleSide: (i, side) => toggle(idx, i, side),
@@ -708,7 +685,7 @@ function ActiveWorkout() {
     onAddWarmup: () => addWarmup(idx),
     onRemoveSetAt: i => removeSetAt(idx, i),
     onStartTimed: i => startTimed(idx, i),
-    onProgressionSettings: () => openProgressionSettings(idx),
+    onProgressionSettings: locked ? undefined : () => openProgressionSettings(idx),
   })
   const navigateUnit = direction => {
     const targetFor = active => {
@@ -745,8 +722,8 @@ function ActiveWorkout() {
   // level down (it used to be the whole menu).
   const openViewMenu = () => menuSheet({
     items: [
-      { icon: 'pencil', label: t('Rename workout'), onClick: renameWorkoutSheet },
-      { icon: 'plus', label: t('Add routine'), sub: t('Bring another routine into this session'), onClick: addRoutineToSessionSheet },
+      !locked && { icon: 'pencil', label: t('Rename workout'), onClick: renameWorkoutSheet },
+      !locked && { icon: 'plus', label: t('Add routine'), sub: t('Bring another routine into this session'), onClick: addRoutineToSessionSheet },
       { icon: 'list', label: t('Layout'), sub: LAYOUT_LABEL[workoutView] || LAYOUT_LABEL.cards, onClick: openLayoutMenu },
     ],
   })
@@ -980,7 +957,7 @@ function ActiveWorkout() {
     <div className={'whdr' + (listMode ? ' stick' : '')} ref={hdrRef}>
     <div className="hdr">
       <button className="iconbtn" aria-label={t('Discard')} onClick={() => confirmSheet({ title: t('Discard workout?'), message: t('The sets you logged in this session will be lost.'), confirmText: t('Discard'), danger: true, onConfirm: () => { update(s => { s.active = null }); stopRest(); stopWork(); nav('/home') } })}><Icon name="xmark" /></button>
-      <div style={{ textAlign: 'center' }}><div style={{ fontWeight: 600 }}>{A.name}</div><div className="sub">{A.backfill ? fmtDate(A.d, true) : <Elapsed start={A.start} />} · {t('{0} sets', done + '/' + total)}</div></div>
+      <div style={{ textAlign: 'center' }}><div style={{ fontWeight: 600 }}>{A.name}</div>{A.programWeek && <div className="small accent">Semana {A.programWeek} de 12</div>}<div className="sub">{A.backfill ? fmtDate(A.d, true) : <Elapsed start={A.start} />} · {t('{0} sets', done + '/' + total)}</div></div>
       <div className="row" style={{ gap: 4, flex: 'none' }}>
         <button className="iconbtn" aria-label={t('Workout view')} title={t('Workout view')} onClick={openViewMenu}><Icon name="more" /></button>
         <button className="iconbtn" style={{ color: 'var(--acc)' }} aria-label={t('Finish')} onClick={finishWorkout}><Icon name="check" /></button>
@@ -1051,7 +1028,7 @@ function ActiveWorkout() {
           })}
         </div>
       ) : (
-        <ExerciseBlock entryIdx={cur} onPairPrev={onPairPrev} onPairNext={onPairNext} {...blockProps(cur)} />
+        <ExerciseBlock entryIdx={cur} onPairPrev={locked ? undefined : onPairPrev} onPairNext={locked ? undefined : onPairNext} {...blockProps(cur)} />
       )}
       </div>
     </>) : <div className="empty"><div className="ico"><Icon name="shuffle" /></div>{t('Freestyle workout — add your first exercise.')}</div>}
@@ -1062,8 +1039,8 @@ function ActiveWorkout() {
       <Button trailingIcon="chevronRight" disabled={unitIdx < 0 || unitIdx >= units.length - 1} onClick={() => navigateUnit(1)}>{t('Next')}</Button>
     </div>}
     {!listMode && <div style={{ height: 10 }} />}
-    {wc.exerciseButtons && listMode && A.entries.length > 0 && <div className="muted small" style={{ marginBottom: 6 }}>{t('Move, swap and remove below act on the exercise marked {0}.', t('Current'))}</div>}
-    <Button onClick={() => exercisePicker((ex, quick) => {
+    {!locked && wc.exerciseButtons && listMode && A.entries.length > 0 && <div className="muted small" style={{ marginBottom: 6 }}>{t('Move, swap and remove below act on the exercise marked {0}.', t('Current'))}</div>}
+    {!locked && <Button onClick={() => exercisePicker((ex, quick) => {
       // A freehand add inherits the current unit's routine (its `rid`) so it lands in that
       // routine's block in a combined session and gets a real prescription; a routine-less
       // freestyle session has no `rid` to inherit. `noProg` is never set independently here —
@@ -1096,8 +1073,8 @@ function ActiveWorkout() {
       // who wants to set sets/reps first.
       if (quick) { commit(seed || defaultConfig(ex.id)); useUI.getState().toast(t('“{0}” added to {1}', capWords(exerciseNameFor(ex)), routine ? routine.name : t('Freestyle'))) }
       else exConfigSheet(ex, null, commit, null, routine, seed)
-    })} icon="plus">{t('Add exercise')}</Button>
-    {wc.exerciseButtons && A.entries.length > 0 && <>
+    })} icon="plus">{t('Add exercise')}</Button>}
+    {!locked && wc.exerciseButtons && A.entries.length > 0 && <>
       <div style={{ height: 6 }} />
       <div className="row">
         <Button size="sm" icon="chevronUp" aria-label={t('Move up')}
@@ -1134,7 +1111,8 @@ function ActiveWorkout() {
   </div>
 }
 
-export default function Workout() {
+export default function Workout({ studentOnly = false }) {
   const active = useStore(s => s.S.active)
-  return active ? <ActiveWorkout /> : <StartChooser />
+  if (studentOnly && active && !active.lockedProgram) return <div className="narrow"><div className="card"><h2>Treino anterior em andamento</h2><p>Você tem um registro iniciado antes do Summer Shredded. Salve o que já realizou ou descarte esta sessão para começar o programa.</p><Button onClick={finishWorkout}>Salvar registro anterior</Button><Button variant="ghost" onClick={() => confirmSheet({ title: 'Descartar sessão anterior?', message: 'O registro em andamento será descartado. Seu histórico permanece salvo.', confirmText: 'Descartar', danger: true, onConfirm: () => { useStore.getState().update(s => { s.active = null }); useUI.getState().stopRest(); useUI.getState().stopWork() } })}>Descartar sessão anterior</Button></div></div>
+  return active ? <ActiveWorkout /> : <SummerHome />
 }

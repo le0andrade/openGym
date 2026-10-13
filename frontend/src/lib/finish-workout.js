@@ -7,6 +7,10 @@ export function buildCompletedWorkout(active, { end = Date.now(), prs = [], snap
   const entries = (active?.entries || []).map(entry => {
     const completed = {
       id: entry.id,
+      ...(active.product === 'summer-shredded' ? {
+        displayName: entry.displayName, sourcePrescription: entry.sourcePrescription,
+        producerNote: entry.producerNote, producerTechnique: entry.producerTechnique
+      } : {}),
       sets: entry.sets,
       topW: bestWeightForEntry(entry) || null,
       target: entry.target || null,
@@ -41,6 +45,10 @@ export function buildCompletedWorkout(active, { end = Date.now(), prs = [], snap
 
   return {
     id: active.id,
+    ...(active.product === 'summer-shredded' ? {
+      product: active.product, programId: active.programId, programSlug: active.programSlug,
+      programWeek: active.programWeek, programWorkoutId: active.programWorkoutId, contentVersion: active.contentVersion
+    } : {}),
     d: active.d,
     start: active.start,
     end,

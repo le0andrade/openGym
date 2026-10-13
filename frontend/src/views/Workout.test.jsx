@@ -1495,3 +1495,20 @@ describe('set-row column header', () => {
     expect(container.querySelector('.setrow .stp.w').classList.contains('plain')).toBe(true)
   })
 })
+
+// Summer Shredded locks structure, while ordinary historical sessions stay compatible.
+describe('Summer Shredded prescribed execution',()=>{
+  it('shows producer names, prescription and notes in compact view without editing controls',async()=>{
+    await mount([exercise('0596',[false,false],{displayName:'Nome do produtor',sourcePrescription:'2x10a15',producerNote:'Pico de contração 2"',producerTechnique:'dead-stop'})],0,{active:{lockedProgram:true,programWeek:3,workoutView:'compact'},wc:{setShortcuts:true,exerciseButtons:true,pairButtons:true}})
+    expect(container.textContent).toContain('Nome do produtor')
+    expect(container.textContent).toContain('2x10a15')
+    expect(container.textContent).toContain('Pico de contração 2"')
+    expect(container.textContent).toContain('Semana 3 de 12')
+    for(const label of ['Add exercise','Add set','Remove exercise','Swap exercise','Move up'])expect(container.textContent).not.toContain(label)
+    const more=container.querySelector('button[aria-label="More"]')
+    await act(async()=>more.click())
+    const menu=mocks.menuSheet.mock.calls.at(-1)[0].items.filter(Boolean)
+    expect(menu.map(x=>x.label)).not.toContain('Swap exercise')
+    expect(menu.map(x=>x.label)).not.toContain('Add warm-up set')
+  })
+})

@@ -12,37 +12,48 @@ const WEEK_KEY = 'summer_shredded_dev_week'
 
 let cached = null
 let pending = null
+let cachedOwner = null
 
 const clone = value => JSON.parse(JSON.stringify(value))
 
 export function clearSummerContentCache() {
   cached = null
   pending = null
+  cachedOwner = null
+  registerProductExercises([])
 }
 
 export async function loadSummerContent({ force = false } = {}) {
+  const owner = useStore.getState().user?.id || null
+  if (owner !== cachedOwner) { clearSummerContentCache(); cachedOwner = owner }
   if (!force && cached) return cached
-  if (!force && pending) return pending
-  pending = api('/api/summer-shredded/content')
+  if (pending) return pending
+  const request = api('/api/summer-shredded/content')
     .then(data => {
+      if (owner !== (useStore.getState().user?.id || null)) throw new Error('account changed')
       cached = data
       registerProductExercises(data.customExercises || [])
       return data
     })
-    .finally(() => { pending = null })
-  return pending
+    .finally(() => { if (pending === request) pending = null })
+  pending = request
+  return request
 }
 
 export function useSummerContent() {
-  const [state, setState] = useState(() => ({ data: cached, loading: !cached, error: null }))
+  const owner = useStore(s => s.user?.id)
+  const [state, setState] = useState(() => ({ data: cachedOwner === owner ? cached : null, loading: !cached || cachedOwner !== owner, error: null }))
 
   useEffect(() => {
     let live = true
-    loadSummerContent()
+    const refresh = () => loadSummerContent({ force: true })
       .then(data => { if (live) setState({ data, loading: false, error: null }) })
-      .catch(error => { if (live) setState({ data: null, loading: false, error }) })
-    return () => { live = false }
-  }, [])
+      .catch(error => { if (live) setState(previous => ({ ...previous, loading: false, error: previous.data ? null : error })) })
+    refresh()
+    window.addEventListener('focus', refresh)
+    const timer = setInterval(refresh, 60000)
+    return () => { live = false; clearInterval(timer); window.removeEventListener('focus', refresh) }
+  }, [owner])
 
   return state
 }
@@ -82,24 +93,28 @@ export function useSummerSelection(content, user) {
   const [slug, setSlugState] = useState(() => selectedProgramSlug(user))
   const [week, setWeekState] = useState(() => selectedProgramWeek(user))
 
+  const chosenSlug = user?.admin ? slug : content?.selection?.programSlug
+  const chosenWeek = user?.admin ? week : content?.selection?.week
   const program = useMemo(
-    () => content?.programs?.find(p => p.slug === slug) || content?.programs?.[0] || null,
-    [content, slug]
+    () => content?.programs?.find(p => p.slug === chosenSlug) || null,
+    [content, chosenSlug]
   )
 
   const setSlug = next => {
+    if (!user?.admin) return
     const value = next === 'feminino' ? 'feminino' : 'masculino'
     if (user?.admin) setSelectedProgramSlug(value)
     setSlugState(value)
   }
 
   const setWeek = next => {
+    if (!user?.admin) return
     const value = Math.max(1, Math.min(12, Math.round(Number(next) || 1)))
     if (user?.admin) setSelectedProgramWeek(value)
     setWeekState(value)
   }
 
-  return { program, slug, week, setSlug, setWeek }
+  return { program, slug: chosenSlug, week: chosenWeek, setSlug, setWeek }
 }
 
 export function parseSummerPrescription(text) {
@@ -160,7 +175,7 @@ export function buildSummerWorkoutEntries(state, workout, week) {
     if (!cfg) return null
 
     const parsed = parseSummerPrescription(slot.prescription?.[Number(week) - 1])
-    let sets = buildSets(state, cfg)
+    let sets = buildSets(state, cfg, parsed?.mode === 'cardio' ? { useTarget: true } : {})
 
     // buildSets deliberately remembers last session's reps. Summer Shredded has a producer-owned
     // week range, so keep that useful carry-over only while it is inside this week's bounds.
@@ -176,22 +191,26 @@ export function buildSummerWorkoutEntries(state, workout, week) {
 
     return {
       id: cfg.id,
-      target: { ...cfg },
+      target: { ...cfg, restSec: Math.max(90, Math.min(300, Number(state.restSec) || 90)),
+        ...(slot.technique === 'rest-pause' ? { intensifier: { type: 'restpause', restSec: 10 } } : {}) },
       plan: { policy: 'off', kind: 'off' },
       sets,
       displayName: slot.sourceName,
       sourcePrescription: slot.prescription?.[Number(week) - 1] || null,
       producerNote: slot.note || null,
       producerTechnique: slot.technique || null,
+      producerTechniqueDescription: slot.techniqueDescription || null,
       locked: true
     }
   }).filter(Boolean)
 }
 
 export function beginSummerWorkout(program, workout, week, bw = null) {
-  if (!program || !workout) return
+  if (!program || !workout || !Number.isInteger(Number(week)) || week < 1 || week > 12) return
   const { S, update } = useStore.getState()
+  if (S.active) { nav('/workout'); return }
   const entries = buildSummerWorkoutEntries(S, workout, week)
+  if (!entries.length) return
 
   update(s => {
     s.active = {
@@ -209,6 +228,7 @@ export function beginSummerWorkout(program, workout, week, bw = null) {
       programSlug: program.slug,
       programWeek: Number(week),
       programWorkoutId: workout.id,
+      contentVersion: program.contentVersion,
       lockedProgram: true
     }
   })
@@ -216,13 +236,23 @@ export function beginSummerWorkout(program, workout, week, bw = null) {
   nav('/workout')
 }
 
+export async function enrollSummerProgram(programSlug) {
+  await api('/api/summer-shredded/enrollment', { method: 'POST', body: JSON.stringify({ programSlug }) })
+  if (pending) await pending.catch(() => {})
+  return loadSummerContent({ force: true })
+}
+
+export function conditioningWorkout(program, kind, option = 0) {
+  if (kind === 'abdomen') return { id: 'abdomen', name: 'Abdômen', exercises: [program.conditioning.abdomen] }
+  const cardio = program.conditioning.cardio
+  const chosen = cardio.options[option]
+  return { id: 'cardio', name: `Cardio · ${chosen.label}`, exercises: [{ ...chosen, sourceName: chosen.label,
+    prescription: cardio.prescription, note: cardio.intensity }] }
+}
+
 export function startSummerWorkout(program, workout, week) {
   if (!program || !workout) return
-  const S = useStore.getState().S
-  // Keep the existing optional weigh-in flow out of the product adapter for now: the workout
-  // starts immediately, while body weight remains loggable from Home/Stats. This avoids routing
-  // a prescribed program through the generic routine picker.
-  beginSummerWorkout(program, workout, week, S.weighIn === false ? null : null)
+  beginSummerWorkout(program, workout, week)
 }
 
 export function programFor(content, slug) {
