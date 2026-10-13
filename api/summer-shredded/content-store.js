@@ -1,5 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { reconcileSeed } from './migration.js'
+import { createEnrollmentStore, selectionFor } from './enrollment.js'
 
 import {
   SUMMER_SHREDDED_CUSTOM_EXERCISES,
@@ -119,13 +121,40 @@ export function createContentStore(dataDir) {
   }
 
   const read = () => {
-    try {
-      const parsed = JSON.parse(fs.readFileSync(file, 'utf8'))
-      if (parsed?.schema === SCHEMA && parsed?.published && parsed?.draft) return parsed
-    } catch {}
-    const seeded = seedContent()
-    write(seeded)
-    return seeded
+    let raw
+    try { raw = fs.readFileSync(file, 'utf8') }
+    catch (e) {
+      if (e.code !== 'ENOENT') throw e
+      const seeded = seedContent()
+      seeded.catalogueMigration = { version: '2.0.0', seeded: true }
+      write(seeded)
+      return seeded
+    }
+    const parsed = JSON.parse(raw)
+    if (parsed?.schema !== SCHEMA || !parsed?.published || !parsed?.draft) throw new Error('invalid product content file; restore a backup')
+    if (parsed.catalogueMigration?.version === '2.0.0') return parsed
+    const report = { version: '2.0.0', at: now(), conflicts: [], blocked: [] }
+    for (const layer of ['published', 'draft']) {
+      const result = reconcileSeed(parsed[layer])
+      report.conflicts.push(...result.conflicts.map(field => `${layer}${field}`))
+      try {
+        const clean = validateProductContent(result.content)
+        if (JSON.stringify(clean) !== JSON.stringify(parsed[layer])) {
+          if (layer === 'published') {
+            parsed.revision = (Number(parsed.revision) || 0) + 1
+            clean.revision = parsed.revision
+            clean.publishedAt = report.at
+          }
+          parsed[layer] = clean
+        }
+      } catch (e) { report.blocked.push({ layer, error: e.message }) }
+    }
+    // Preserve the exact original file before applying any reconciliation.
+    try { fs.writeFileSync(file + '.pre-v2-backup', raw, { flag: 'wx', mode: 0o600 }) }
+    catch (e) { if (e.code !== 'EEXIST') throw e }
+    parsed.catalogueMigration = report
+    write(parsed)
+    return parsed
   }
 
   const saveDraft = (content, userId) => {
@@ -155,6 +184,7 @@ export function createContentStore(dataDir) {
       updatedAt: publishedAt,
       updatedBy: userId || null
     }
+    if (state.catalogueMigration) state.catalogueMigration.blocked = []
     write(state)
     return state
   }
@@ -164,18 +194,33 @@ export function createContentStore(dataDir) {
 
 export function summerShreddedRoutes({ dataDir, json, readBody, readSession, requireAdmin, audit }) {
   const store = createContentStore(dataDir)
+  const enrollments = createEnrollmentStore(dataDir)
 
   return {
     'GET /api/summer-shredded/content': async (req, res) => {
       const user = readSession(req)
       if (!user) return json(res, 401, { error: 'not signed in' })
       const state = store.read()
+      if (state.catalogueMigration?.blocked?.some(x => x.layer === 'published')) {
+        return json(res, 503, { error: 'program content requires producer review' })
+      }
       json(res, 200, {
         revision: state.published.revision,
         publishedAt: state.published.publishedAt,
         programs: state.published.programs,
-        customExercises: state.published.customExercises
+        customExercises: state.published.customExercises,
+        selection: selectionFor(enrollments.read(user.id))
       })
+    },
+
+    'POST /api/summer-shredded/enrollment': async (req, res) => {
+      const user = readSession(req)
+      if (!user) return json(res, 401, { error: 'not signed in' })
+      const body = await readBody(req)
+      try {
+        const selection = selectionFor(enrollments.enroll(user.id, body.programSlug))
+        json(res, 200, { selection })
+      } catch (e) { json(res, e.message === 'program already selected' ? 409 : 400, { error: e.message }) }
     },
 
     'GET /api/admin/summer-shredded/content': async (req, res) => {
