@@ -1,6 +1,7 @@
 param(
   [string]$PublicHost = '',
-  [switch]$NoOpen
+  [switch]$NoOpen,
+  [switch]$Preview
 )
 
 $ErrorActionPreference = 'Stop'
@@ -73,7 +74,8 @@ function Start-ForgeWindow([string]$Title, [string]$Command) {
 Set-Location -LiteralPath '$escapedRoot'
 $Command
 "@
-  Start-Process powershell.exe -WorkingDirectory $RepoRoot -ArgumentList @('-NoExit', '-NoLogo', '-Command', $wrapped) | Out-Null
+  $logName = $Title.ToLowerInvariant().Replace(' ', '-')
+  Start-Process powershell.exe -WindowStyle Hidden -WorkingDirectory $RepoRoot -ArgumentList @('-NoExit', '-NoLogo', '-Command', $wrapped) -RedirectStandardOutput (Join-Path $RepoRoot "data\$logName.log") -RedirectStandardError (Join-Path $RepoRoot "data\$logName.error.log") | Out-Null
 }
 
 Set-Location -LiteralPath $RepoRoot
@@ -169,8 +171,16 @@ Stop-ForgeListener $ApiPort
 Stop-ForgeListener $FrontendPort
 
 $escapedRootForEnv = $RepoRoot.Replace("'", "''")
+$previewEnvironment = "`$env:SUMMER_PREVIEW = ''"
+$apiDataDirectory = "$escapedRootForEnv\data"
+if ($Preview) {
+  $apiDataDirectory = "$escapedRootForEnv\data\summer-preview"
+  $previewEnvironment = "`$env:NODE_ENV = 'development'`n`$env:SUMMER_ACCESS_MODE = 'development'`n`$env:SUMMER_PREVIEW = '1'"
+  Write-Host 'Modo de validacao: entrada direta como aluno/produtor, com dados separados em data/summer-preview.' -ForegroundColor Yellow
+}
 $apiCommand = @"
-`$env:DATA_DIR = '$escapedRootForEnv\data'
+$previewEnvironment
+`$env:DATA_DIR = '$apiDataDirectory'
 `$env:RP_ID = '$PublicHost'
 `$env:ORIGIN = '$PublicUrl'
 `$env:RP_NAME = 'Forge'
@@ -188,12 +198,12 @@ npm --prefix frontend run dev -- --host 127.0.0.1 --port $FrontendPort
 
 Start-ForgeWindow 'Forge API' $apiCommand
 if (-not (Wait-ForPort $ApiPort)) {
-  throw "A API nao abriu a porta $ApiPort em tempo. Veja a janela 'Forge API'."
+  throw "A API nao abriu a porta $ApiPort em tempo. Veja data/forge-api.error.log."
 }
 
 Start-ForgeWindow 'Forge Frontend' $frontendCommand
 if (-not (Wait-ForPort $FrontendPort)) {
-  throw "O frontend nao abriu a porta $FrontendPort em tempo. Veja a janela 'Forge Frontend'."
+  throw "O frontend nao abriu a porta $FrontendPort em tempo. Veja data/forge-frontend.error.log."
 }
 
 Write-Step 'Garantindo Tailscale Funnel em background'

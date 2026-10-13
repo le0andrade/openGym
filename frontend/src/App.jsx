@@ -32,6 +32,7 @@ import Settings from './views/Settings.jsx'
 import Admin from './views/SummerAdmin.jsx'
 import SummerDiet from './views/SummerDiet.jsx'
 import SummerAccess from './views/SummerAccess.jsx'
+import SummerPreview from './components/SummerPreview.jsx'
 
 // last known scrollY per route, so back-navigation can put the page where it was
 const scrollPositions = new Map()
@@ -139,7 +140,7 @@ function Shell() {
         <ErrorBoundary>
           {authed && !needsMobileOnboarding && <SyncBanner />}
           {!authed ? <Login /> : needsMobileOnboarding ? <MobileOnboarding /> : (
-            <SummerAccess><Routes>
+            <><SummerPreview compact /><SummerAccess><Routes>
               <Route path="/home" element={<Home />} />
 
               <Route path="/workout" element={<Workout studentOnly />} />
@@ -151,7 +152,7 @@ function Shell() {
 
               <Route path="/admin" element={user?.admin ? <Admin /> : <Navigate to="/home" replace />} />
               <Route path="*" element={<Navigate to="/home" replace />} />
-            </Routes><TabBar /><RestTimer /><TimerFlash /></SummerAccess>
+            </Routes><TabBar /><RestTimer /><TimerFlash /></SummerAccess></>
           )}
         </ErrorBoundary>
       </div>

@@ -10,6 +10,7 @@ import Icon from '../components/Icon.jsx'
 import { Button } from '../components/ui.jsx'
 import { askAddDeviceData } from '../sheets.jsx'
 import { BRAND_NAME } from '../lib/forge.js'
+import SummerPreview from '../components/SummerPreview.jsx'
 
 function RegisterSheet({ close }) {
   const { setUser, pushState, pullState, loadConfig } = useStore()
@@ -76,6 +77,8 @@ export default function Login() {
       </div>
     </div>
   )
+
+  if (config?.summer_preview) return <div className="narrow" style={wrap}>{head}<SummerPreview /></div>
 
   return (
     <div className="narrow" style={wrap}>

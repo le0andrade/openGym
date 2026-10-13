@@ -21,6 +21,7 @@ import { dayReminderPush, restTimerPush, testPush } from './push-messages.js';
 import { verifyError } from './verify-error.js';
 import { summerShreddedRoutes } from './summer-shredded/content-store.js';
 import { accessRoutes } from './summer-shredded/access.js';
+import { createPreviewAccounts, previewRoutes } from './summer-shredded/preview.js';
 
 const PORT = +(process.env.PORT || 3000);
 const DATA = process.env.DATA_DIR || '/data';
@@ -70,7 +71,8 @@ let db = { users: [], creds: [], subs: [], invites: [] };
 try { db = JSON.parse(fs.readFileSync(dbFile, 'utf8')); } catch {}
 db.subs = db.subs || [];
 db.invites = db.invites || [];
-const isAdmin = user => !!user && (user.admin === true || ADMIN_UIDS.includes(user.id));
+const previewAccounts = createPreviewAccounts();
+const isAdmin = user => !!user && (user.admin === true || ADMIN_UIDS.includes(user.id) || previewAccounts.isProducer(user));
 // 0600: db.json holds passkey credential material. It used to be covered by a blanket 0700 on
 // the whole directory; now that the directory stays traversable, the file carries its own mode.
 function saveDb() { atomicWrite(dbFile, JSON.stringify(db, null, 2), 0o600); }
@@ -421,7 +423,7 @@ function readSession(req) {
   if (!payload) return null;
   const [uid, exp, ver] = payload.split(':');
   if (!uid || +exp < Date.now()) return null;
-  const user = db.users.find(u => u.id === uid) || null;
+  const user = previewAccounts.lookup(uid) || db.users.find(u => u.id === uid) || null;
   if (!user) return null;
   if (user.disabled) return null;           // disabled accounts are locked out everywhere
   // Missing third field = pre-versioning cookie = version 0. Anything non-numeric is a malformed
@@ -693,13 +695,13 @@ const routes = {
   // the app it was before the feature existed.
   'GET /api/config': async (req, res) => {
     const coach = coachConfig.publicConfig();
-    json(res, 200, { invite_only: INVITE_ONLY, allow_guest: ALLOW_GUEST, ...(coach ? { coach } : {}) });
+    json(res, 200, { invite_only: INVITE_ONLY, allow_guest: ALLOW_GUEST, summer_preview: previewAccounts.enabled, ...(coach ? { coach } : {}) });
   },
 
   'GET /api/me': async (req, res) => {
     const user = readSession(req);
     if (!user) return json(res, 401, { error: 'not signed in' });
-    json(res, 200, { user: { id: user.id, name: user.name, admin: isAdmin(user) } });
+    json(res, 200, { user: { id: user.id, name: user.name, admin: isAdmin(user), ...(user.previewRole ? { previewRole: user.previewRole } : {}) } });
   },
 
   'POST /api/register/options': async (req, res) => {
@@ -1196,6 +1198,7 @@ const routes = {
 
   /* ---------- Summer Shredded global product content ---------- */
   ...summerAccess.routes,
+  ...previewRoutes({ accounts: previewAccounts, json, readBody, sessionCookie }),
   ...summerShreddedRoutes({ dataDir: DATA, json, readBody, readSession, requireAdmin, requireAccess: summerAccess.requireAccess, audit }),
 
   /* ---------- AI Coach ---------- */

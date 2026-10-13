@@ -41,6 +41,22 @@ Obter IDs reais dos produtos, segredo do receptor, domínio HTTPS e remetente/cr
 
 Referências oficiais consultadas: [Kiwify: webhooks](https://ajuda.kiwify.com.br/pt-br/article/como-funcionam-os-webhooks-2ydtgl/), [payloads da Kiwify](https://kiwify.notion.site/Webhooks-pt-br-c77eb84be10c42e6bb97cd391bca9dce), [Resend: envio de e-mails](https://resend.com/docs/api-reference/emails/send-email).
 
+## Validação sem passkey ou compra
+
+Na cópia local que executa o servidor, atualize a branch `summer-shredded` antes de usar o novo parâmetro:
+
+```powershell
+git switch summer-shredded
+git pull --ff-only origin summer-shredded
+.\update-forge.ps1 -Preview
+```
+
+O modo Preview usa `data/summer-preview`, separado das contas/compras existentes em `data/`, e define explicitamente `NODE_ENV=development`, `SUMMER_ACCESS_MODE=development` e `SUMMER_PREVIEW=1` na API reiniciada. O login mostra “Ver como aluno” e “Ver como produtor”; as mesmas entradas continuam no topo para alternar entre as experiências. O produtor abre diretamente o editor. Os perfis mantêm dados próprios; trocar de papel sincroniza e limpa a cópia local antes de carregar o outro perfil. A publicação de conteúdo feita nesta instância altera somente os dados de validação.
+
+As duas identidades de teste vivem em memória e não são adicionadas a `db.json`. A entrada direta exige os três sinalizadores e é sempre desativada em `NODE_ENV=production`. Cookies dessas identidades deixam de autenticar ao desativar o modo Preview. Esse modo concede acesso ao painel de validação a quem abrir a URL, inclusive via Tailscale, e deve ser usado somente enquanto estiver demonstrando/testando o produto.
+
+O atualizador inicia API/frontend sem abrir janelas e escreve logs em `data/forge-api.log`, `data/forge-api.error.log`, `data/forge-frontend.log` e `data/forge-frontend.error.log`. Sua sincronização continua descartando alterações locais de código e arquivos não rastreados não ignorados; `data/` e `.env` são preservados. Para retornar ao modo normal, execute novamente sem `-Preview` em um terminal sem os sinalizadores de desenvolvimento.
+
 ## Validação local executada
 
 38 testes Summer Shredded do backend; 123 testes selecionados de alimentação, adaptação/execução/finalização de treino e configurações; compilação de produção do frontend. Navegador com usuários/compras fictícios: matrícula Feminino, cálculo de GET, adicionar alimento/consumo e persistência após recarregar, salvar rascunho/publicar e conferir conteúdo no aluno; bloqueio por reembolso. Layout móvel conferido em 390 × 844. Nenhum e-mail real foi enviado. Docker não está disponível neste ambiente e sua compilação não foi executada; o Dockerfile web inclui agora o módulo compartilhado de protocolo alimentar.
