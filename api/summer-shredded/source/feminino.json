@@ -1,0 +1,585 @@
+{
+  "file": "ebook_5cc381e1-0297-4bf0-a60d-081d1ea4908d(1).pdf",
+  "sha256": "b7713ead005453cd4d4caa4b7ac278783563eed8861d49890c775cd7e5c93ff0",
+  "pages": 1,
+  "extraction": "PyMuPDF 1.28.2 text layer; whitespace only normalized",
+  "visualLimitation": "Overlay LIBERAÇÃO EM 7 DIAS obscures weekly cells in rendered PDF; all 12 weeks exist in text layer.",
+  "rows": [
+    {
+      "section": "A",
+      "sourceName": "Agachamento Frontal",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "A",
+      "sourceName": "Goblet Squat",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "A",
+      "sourceName": "Cadeira extensora c/Rest Pause",
+      "prescription": [
+        "2x20",
+        "2x25",
+        "2x30",
+        "2x30",
+        "3x20",
+        "3x20",
+        "2x25",
+        "2x40",
+        "2x20",
+        "2x20",
+        "2x40",
+        "3x40"
+      ],
+      "note": "Rest pause de 10 segundos"
+    },
+    {
+      "section": "A",
+      "sourceName": "Passada",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "A",
+      "sourceName": "Gêmeos Leg Press",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Crucifixo Máquina",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Militar Press Frente em pé",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Elevação Lateral 45°",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Tríceps Coice Cross Unilateral",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Tríceps Testa",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Tríceps Corda",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Stiff",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Mesa flexora",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Cadeira flexora",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Elevação pélvica unilateral",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Flexão de joelhos em pé c/ caneleira",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Remada Sentado c/ triangulo",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Puxada com triangulo",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Pullover",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Crucifixo Reverso Cross",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Rosca Scott",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Rosca Corda Cross",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Elevação Pélvica Barra",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Frog pumps c/rest pause",
+      "prescription": [
+        "1x30",
+        "2x30",
+        "2x50",
+        "2x50",
+        "3x30",
+        "3x50",
+        "2x50",
+        "2x30",
+        "2x30",
+        "2x50",
+        "4x30",
+        "2x50"
+      ],
+      "note": "Rest pause de 10 segundos"
+    },
+    {
+      "section": "E",
+      "sourceName": "Levantamento terra sumô",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Abdução de quadril no cross",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Glúteo Coice Cross",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Agachamento búlgaro",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "ABDOMÊN",
+      "sourceName": "Elevação de pernas Suspenso",
+      "prescription": [
+        "3x10(TSD)",
+        "3x10(DSDN)",
+        "3x10(TSD)",
+        "4x10 (DSDN)",
+        "4x10 (DSDN)",
+        "2x10 (DSDN)",
+        "3x10(TSD)",
+        "4x10(DSDN)",
+        "4x10 (DSDN)",
+        "2x10 (DSDN)",
+        "3x10(TSD)",
+        "4x10(DSDN)"
+      ],
+      "note": ""
+    },
+    {
+      "section": "Cardio",
+      "sourceName": "Escada/Bike/Transport",
+      "prescription": [
+        "60 min",
+        "60 min",
+        "60 min",
+        "60 min",
+        "45 min",
+        "45 min",
+        "60 min",
+        "60 min",
+        "45 min",
+        "60 min",
+        "45 min",
+        "40 min"
+      ],
+      "note": "Baixa Intensidade"
+    }
+  ],
+  "legend": {
+    "H": "Halteres",
+    "DSDN": "Dia sim, dia não",
+    "TSD": "Todos os dias"
+  },
+  "generalNotes": "Mantenha os descansos de no mínimo 90 segundos entre as séries, podendo chegar até a 300 segundos(5 minutos) REST PAUSE - Realizar o máximo possível de repetições, descansar 10 segundos e seguir a contagem, fazer quantos descansos necessários de 10\" até completar Dicas e Considerações Sempre trabalhe com progressão de cargas, isso é, a cada treino procure superar as cargas do treino passado. Sempre trabalhe na faixa de repetições prescritas, sempre buscando as repetições mais altas, alcançando-as, aumente a carga."
+}

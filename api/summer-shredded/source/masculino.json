@@ -1,0 +1,756 @@
+{
+  "file": "ebook_e61d1e56-6037-4d5f-a686-3fce45510bae(1).pdf",
+  "sha256": "ae3a8284438dc5ac8e5cb3bf25166ba85b538f2d3f7852b652df7a79d4cdd566",
+  "pages": 1,
+  "extraction": "PyMuPDF 1.28.2 text layer; whitespace only normalized",
+  "visualLimitation": "Overlay LIBERAÇÃO EM 7 DIAS obscures weekly cells in rendered PDF; all 12 weeks exist in text layer.",
+  "rows": [
+    {
+      "section": "A",
+      "sourceName": "Crucifixo Máquina",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "A",
+      "sourceName": "Crucifixo Inclinado Cross",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "A",
+      "sourceName": "Supino Inclinado 30° (H)",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "A",
+      "sourceName": "Supino Reto Smith (DEAD STOP)",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": "Usar limitador"
+    },
+    {
+      "section": "A",
+      "sourceName": "Cross Over",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": "Pico de contração 2\""
+    },
+    {
+      "section": "A",
+      "sourceName": "Cross Over Reverso",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Puxada Frente Aberta",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Puxada Supinada Fechada",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Puxada Romada",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Remada Baixa Triângulo",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Remada Aberta Sentado",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "B",
+      "sourceName": "Pulldown Corda",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Militar Press Frente em pé",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Arnold Press",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Elevação Lateral",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Elevação Lateral cross por trás",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Elevação Frontal Alternada Neutra (H)",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Face Pull",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": "Escapulas fechadas"
+    },
+    {
+      "section": "C",
+      "sourceName": "Crucifixo Reverso Cross",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "C",
+      "sourceName": "Encolhimento Smith pela frente",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Rosca Concentrada Sem apoio",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Rosca Direta Cross",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Rosca Martelo (H)",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Rosca Reversa Cross",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Rosca Punho Cross",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Tríceps Pulley Unilateral",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Tríceps Corda",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Tríceps Francês (H)",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "D",
+      "sourceName": "Tríceps Testa 45°",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Agachamento Livre",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Leg Press",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Elevação Pélvica Barra",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Cadeira Extensora Unilateral",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Stiff",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Cadeira Flexora",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Sóleo",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "E",
+      "sourceName": "Gêmeos leg press",
+      "prescription": [
+        "2x10a15",
+        "2x8a12",
+        "2x5a9",
+        "2x3a7",
+        "3x3a7",
+        "3x3a7",
+        "2x8a12",
+        "2x8a12",
+        "3x3a7",
+        "2x5a9",
+        "4x3a7",
+        "2x5a9"
+      ],
+      "note": ""
+    },
+    {
+      "section": "ABDOMÊN",
+      "sourceName": "Elevação de pernas Suspenso",
+      "prescription": [
+        "3x10(TSD)",
+        "3x10(DSDN)",
+        "3x10(TSD)",
+        "4x10 (DSDN)",
+        "4x10 (DSDN)",
+        "2x10 (DSDN)",
+        "3x10(TSD)",
+        "4x10(DSDN)",
+        "4x10 (DSDN)",
+        "2x10 (DSDN)",
+        "3x10(TSD)",
+        "4x10(DSDN)"
+      ],
+      "note": ""
+    },
+    {
+      "section": "Cardio",
+      "sourceName": "Escada/Bike/Transport",
+      "prescription": [
+        "60 min",
+        "60 min",
+        "60 min",
+        "60 min",
+        "45 min",
+        "45 min",
+        "60 min",
+        "60 min",
+        "45 min",
+        "60 min",
+        "45 min",
+        "40 min"
+      ],
+      "note": "Baixa Intensidade"
+    }
+  ],
+  "legend": {
+    "H": "Halteres",
+    "DSDN": "Dia sim, dia não",
+    "TSD": "Todos os dias"
+  },
+  "generalNotes": "Mantenha os descansos de no mínimo 90 segundos entre as séries, podendo chegar até a 300 segundos(5 minutos) DEAD STOP - Realizar uma pausa momentânea, onde a carga toca o chão e o movimento começa da inércia a cada repetição. Dicas e Considerações Sempre trabalhe com progressão de cargas, isso é, a cada treino procure superar as cargas do treino passado. Sempre trabalhe na faixa de repetições prescritas, sempre buscando as repetições mais altas, alcançando-as, aumente a carga."
+}
