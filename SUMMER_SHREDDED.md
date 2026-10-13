@@ -140,7 +140,7 @@ Suggested student diet flow:
 5. Lock the student UI to prescribed content and remove check-in/share/builder surfaces.
 6. Build producer admin CRUD for programs/workouts/exercises.
 7. Add the nutrition domain and student Diet UI from the supplied spreadsheet/protocol.
-8. Connect Kiwify/Supabase entitlement to the final student gate.
+8. Connect Kiwify entitlement to the final student gate.
 9. Harden/publish for production and revisit third-party exercise-media licensing.
 
 ## Canonical catalogue audit — 2026-10-13
@@ -164,10 +164,18 @@ Reproduce PDF evidence with Python + PyMuPDF 1.28.2: `python scripts/summer-shre
 
 On the first read of an existing content file, the backend compares each layer with the previous seed and v2. Only unchanged seed fields are corrected; producer edits, ordering, additions and deletions are retained. The exact old file is preserved as `summer-shredded-content.json.pre-v2-backup`. `catalogueMigration` records conflicts and blocked layers. Migration is idempotent. Corrupt files cause an error instead of being overwritten. A blocked published layer returns 503 until the producer saves valid draft content and publishes. Saved student history and active sessions are never migrated.
 
-Students choose Masculino/Feminino once through authenticated onboarding. Enrollment is stored separately from editable profile data and shared across devices. Start date comes from the server's São Paulo calendar; week advances every seven days and is capped at 12. Client-supplied week/start-date values are ignored. Students cannot restart or switch enrollment. This is the initial onboarding assignment source; Kiwify SKU assignment and entitlement/revocation integration remain a later step. Admin preview retains program/week selectors without modifying student enrollment.
+Students choose Masculino/Feminino once through authenticated onboarding. Enrollment is stored separately from editable profile data and shared across devices. Start date comes from the server's São Paulo calendar; week advances every seven days and is capped at 12. Client-supplied week/start-date values are ignored. Students cannot restart or switch enrollment. This was the initial onboarding assignment source; the following stage adds configurable Kiwify SKU assignment and entitlement/revocation. Admin preview retains program/week selectors without modifying student enrollment.
 
 The home/start screen serves workouts A–E, standalone abdomen and cardio sessions, weekly prescriptions, source notes and technique guidance. Recorded loads carry over within each week's rep range; cardio duration always follows the current week. Rest timers use 90–300 seconds, and rest-pause bursts use the producer's 10 seconds. An active session cannot be overwritten by starting another.
 
 The product shell removes check-in, student plan editing/sharing, the generic exercise library/builder and Coach routes. Workout execution locks exercise order/count, swapping, removal and set count while retaining load/repetition logging, notes, layout choices, completion and history. Rest-pause bursts remain loggable where prescribed. Source names, prescriptions, notes, program/version/week and workout ID survive completion. Legacy unfinished sessions may be saved or discarded through the product shell, without exposing their builder controls. Existing routines, gym cards and custom exercises remain stored as legacy profile data, without student editing/execution entry points.
 
 Validation performed on local fixtures: 27 backend migration/enrollment/catalogue tests and 120 frontend adapter, completion, execution-lock and existing workout/settings regression tests passed; production frontend build passed. Real browser: authenticated Feminino onboarding, start A, record 40 kg × 12, early finish, reload and confirm history plus server persistence; removed plan/check-in routes redirect home. Mobile layout checked at 390 × 844. The local media service was not running, so image/GIF requests failed and existing fallback behavior was observed; this run does not certify exercise media. No production deployment or Docker build was performed.
+
+## Producer, nutrition and purchase gate — 2026-10-13
+
+The producer now edits workout structure, catalog references, weekly prescriptions, techniques and notes through the authenticated admin panel. Draft saves are separate from publication and use revision checks to reject concurrent overwrites. The student Diet tab stores profile, meal quantities, substitutions and daily meal marks in the existing synchronized profile. A reproducible source importer versions 93 foods with original units and source-row evidence; incomplete nutrient entries remain explicit. The 12-week nutrition protocol preserves seven unspecified days as pending producer definitions, and requires a week-7 weight update.
+
+The Kiwify receiver and buyer email-code binding enforce program-specific purchase rights and revocation. Missing configuration closes student access; administrative access is retained. Only local fixture events were exercised. Actual product IDs, HTTPS webhook registration, a verified email sender, real provider payload checks and external activation remain pending. Passkey authentication remains in use; Google OAuth/password login are not implemented. See `docs/SUMMER_SHREDDED_INTEGRATION.md` for configuration, source limitations and exact validation scope.
+
+Executed: 38 backend Summer Shredded tests, 123 selected frontend tests and production frontend build. Browser fixtures confirmed nutrition persistence, draft/publication reaching the student and refund blocking access; mobile panels inspected at 390 × 844. No real email, production deployment or Docker build was executed.

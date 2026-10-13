@@ -46,11 +46,11 @@ export default function SummerHome() {
       </div>}
       {S.active && <div className="card"><h2>Treino em andamento</h2><p>{S.active.name}</p><Button variant="primary" icon="play" onClick={() => nav('/workout')}>Continuar treino</Button></div>}
       {content.selection?.completed && <div className="card">As 12 semanas do programa passaram. Seus registros continuam em Progresso.</div>}
-      <div className="card"><div className="row between"><h2>Treinos da semana</h2><span className="tag acc">{done.filter(w=>w.programWorkoutId?.match(/^[A-E]$/)).length} registros</span></div>
+      <div className="card"><div className="row between"><h2>Treinos da semana</h2><span className="tag acc">{done.filter(log=>program.workouts.some(w=>w.id===log.programWorkoutId)).length} registros</span></div>
         <p className="small muted">Escolha o treino previsto para hoje.</p>
         {program.workouts.map(w => <div key={w.id} style={{ marginBottom: 14 }}>
           <div className="row between"><Button variant="ghost" onClick={() => setExpanded(expanded === w.id ? null : w.id)}>{w.name} · {w.exercises.length} exercícios</Button>
-            <Button size="sm" variant="primary" style={{ flex: 'none', width: 'auto', whiteSpace: 'nowrap' }} disabled={!!S.active} onClick={() => start(w)}>Iniciar {w.id}</Button></div>
+            <Button size="sm" variant="primary" style={{ flex: 'none', width: 'auto', whiteSpace: 'nowrap' }} disabled={!!S.active || !w.exercises.length} onClick={() => start(w)}>Iniciar {w.id}</Button></div>
           {done.some(x=>x.programWorkoutId===w.id && x.d===todayISO()) && <div className="small accent">Registrado hoje</div>}
           {expanded === w.id && <div className="list">{w.exercises.map((e,i)=><div className="item" key={i}><div className="grow"><div className="tt">{e.sourceName}</div><div className="ss">{e.prescription[week-1]}{e.note ? ` · ${e.note}` : ''}</div></div></div>)}</div>}
         </div>)}
