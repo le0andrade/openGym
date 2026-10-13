@@ -142,3 +142,20 @@ Suggested student diet flow:
 7. Add the nutrition domain and student Diet UI from the supplied spreadsheet/protocol.
 8. Connect Kiwify/Supabase entitlement to the final student gate.
 9. Harden/publish for production and revisit third-party exercise-media licensing.
+
+## Canonical catalogue audit — 2026-10-13
+
+Catalogue v2.0.0 is implemented in `api/summer-shredded/canonical-data.js` and consumed through the existing `programs.js` exports. See `api/summer-shredded/CATALOGUE_REVIEW.md` for every mapping and its review rationale.
+
+- Audited the complete male/female PDF text layers: 65 A–E exercise slots plus abdomen/cardio, 828 weekly cells.
+- Corrected 19 workout occurrences referencing IDs absent from the shipped 1,324-entry EXDB.
+- 73 mapping occurrences including conditioning options: 24 exact, 33 equivalent, 16 custom occurrences backed by 14 unique media-less product exercises.
+- Preserved 12 weeks, exceptional female prescriptions, rest-pause/dead-stop, inline/general notes and H/DSDN/TSD legends. No original video URLs or licensee details are included.
+- Versioned source evidence includes PDF SHA-256 and independently extracted rows. Both renders contain a LIBERAÇÃO EM 7 DIAS overlay: obscured cells were verified against text extraction, not visually certified.
+- All mappings await producer review; GIF/image visual validation remains pending. Custom exercise anatomy/equipment metadata stays unknown until reviewed instead of guessing it.
+- Backend draft/publication validation now rejects dangling references, classification mismatches and EXDB/custom ID collisions, including abdomen/cardio.
+- Existing saved publications/drafts and execution history are not automatically migrated. Reconcile the reviewed seed with producer edits before publishing through the existing admin API.
+
+Validation executed: `node --test api/test/summer-shredded-*.test.js` (19 passing tests). Full application suite, browser end-to-end and Docker build were not run. Docker packaging now includes the required Summer Shredded module directory.
+
+Reproduce PDF evidence with Python + PyMuPDF 1.28.2: `python scripts/summer-shredded/extract-source.py <directory-containing-original-pdfs>`. Rebuild the mapping report with `node scripts/summer-shredded/catalogue-report.mjs`.

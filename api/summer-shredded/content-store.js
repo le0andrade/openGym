@@ -8,6 +8,7 @@ import {
 
 const SCHEMA = 1
 const FILE = 'summer-shredded-content.json'
+const EXDB_IDS = new Set(JSON.parse(fs.readFileSync(new URL('./exdb-index.json', import.meta.url), 'utf8')).map(e => e.id))
 
 const clone = value => JSON.parse(JSON.stringify(value))
 const now = () => new Date().toISOString()
@@ -85,6 +86,24 @@ export function validateProductContent(value) {
   const serialized = JSON.stringify(value)
   if (/youtube\.com|youtu\.be|instagram\.com/i.test(serialized)) {
     throw new Error('external exercise video links are not supported')
+  }
+
+  for (const id of customIds) {
+    if (EXDB_IDS.has(id)) throw new Error(`custom exercise shadows EXDB id: ${id}`)
+  }
+  const validateReference = (exercise, context) => {
+    assertString(exercise?.exerciseId, `${context}.exerciseId`, 100)
+    const isCustom = customIds.has(exercise.exerciseId)
+    if (!isCustom && !EXDB_IDS.has(exercise.exerciseId)) throw new Error(`unknown exercise id: ${exercise.exerciseId}`)
+    if (!['exact', 'equivalent', 'custom'].includes(exercise.match)) throw new Error(`invalid match: ${context}`)
+    if ((exercise.match === 'custom') !== isCustom) throw new Error(`exercise match/catalogue mismatch: ${context}`)
+  }
+  for (const program of value.programs) {
+    for (const workout of program.workouts) {
+      for (const exercise of workout.exercises) validateReference(exercise, `${program.id}/${workout.id}`)
+    }
+    validateReference(program.conditioning.abdomen, `${program.id}/abdomen`)
+    for (const option of program.conditioning.cardio.options) validateReference(option, `${program.id}/cardio`)
   }
 
   return clone(value)
