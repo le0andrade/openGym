@@ -20,6 +20,7 @@ import { startWarmup } from './coach/warmup.js';
 import { dayReminderPush, restTimerPush, testPush } from './push-messages.js';
 import { verifyError } from './verify-error.js';
 import { summerShreddedRoutes } from './summer-shredded/content-store.js';
+import { accessRoutes } from './summer-shredded/access.js';
 
 const PORT = +(process.env.PORT || 3000);
 const DATA = process.env.DATA_DIR || '/data';
@@ -682,6 +683,7 @@ if (AUDIT_ON) {
 }
 
 /* ---------- routes ---------- */
+const summerAccess = accessRoutes({ dataDir: DATA, json, readBody, readSession, isAdmin });
 const routes = {
   'GET /api/health': async (req, res) => json(res, 200, { ok: true, users: db.users.length }),
 
@@ -1193,7 +1195,8 @@ const routes = {
   },
 
   /* ---------- Summer Shredded global product content ---------- */
-  ...summerShreddedRoutes({ dataDir: DATA, json, readBody, readSession, requireAdmin, audit }),
+  ...summerAccess.routes,
+  ...summerShreddedRoutes({ dataDir: DATA, json, readBody, readSession, requireAdmin, requireAccess: summerAccess.requireAccess, audit }),
 
   /* ---------- AI Coach ---------- */
   // Routes live in coach/routes.js and are handed the helpers above rather than importing

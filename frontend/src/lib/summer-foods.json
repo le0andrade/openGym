@@ -1,0 +1,1531 @@
+{
+  "file": "Planilha--Automatizada (1).xlsx",
+  "sha256": "f4292010f46f52f94fb6cc3b345e72244169cb9311155c9b3ec45500112367c6",
+  "basis": "nutrients per ONE source measure (1 g, 1 ml or 1 unit), never automatically per 100 g",
+  "issues": [
+    {
+      "row": 3,
+      "name": "Carboidratos",
+      "reason": "generic portion, not a named food"
+    },
+    {
+      "row": 34,
+      "name": "Proteínas",
+      "reason": "generic portion, not a named food"
+    },
+    {
+      "row": 52,
+      "name": "Coxa frango, sem pele, coz",
+      "reason": "duplicate name; spreadsheet lookup uses first occurrence",
+      "firstRow": 35
+    },
+    {
+      "row": 63,
+      "name": "Gorduras",
+      "reason": "generic portion, not a named food"
+    },
+    {
+      "row": 97,
+      "name": "Brocolis",
+      "reason": "duplicate name; spreadsheet lookup uses first occurrence",
+      "firstRow": 88
+    },
+    {
+      "row": 122,
+      "name": "Salada á vontade",
+      "reason": "duplicate name; spreadsheet lookup uses first occurrence",
+      "firstRow": 115
+    }
+  ],
+  "version": "1.0.0",
+  "foods": [
+    {
+      "id": "food-4",
+      "name": "Arroz branco",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.025208166666666667,
+      "carbs": 0.2805984999999999,
+      "fat": 0.00227,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 4,
+        "range": "A4:F4"
+      }
+    },
+    {
+      "id": "food-5",
+      "name": "Arroz integral",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.0258825,
+      "carbs": 0.25809750000000004,
+      "fat": 0.010003333333333333,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 5,
+        "range": "A5:F5"
+      }
+    },
+    {
+      "id": "food-6",
+      "name": "Macarrão",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.1,
+      "carbs": 0.77,
+      "fat": 0.02,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 6,
+        "range": "A6:F6"
+      }
+    },
+    {
+      "id": "food-7",
+      "name": "Macarrão integral, coz",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.053,
+      "carbs": 0.2654,
+      "fat": 0.0054,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 7,
+        "range": "A7:F7"
+      }
+    },
+    {
+      "id": "food-8",
+      "name": "Macarrão de arroz, coz",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.02,
+      "carbs": 0.2654,
+      "fat": 0.0054,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 8,
+        "range": "A8:F8"
+      }
+    },
+    {
+      "id": "food-9",
+      "name": "Pão integral 12 grãos",
+      "unit": "fatia (s)",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 4.35,
+      "carbs": 7,
+      "fat": 1.15,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 9,
+        "range": "A9:F9"
+      }
+    },
+    {
+      "id": "food-10",
+      "name": "Batata inglesa coz",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.011645833333333333,
+      "carbs": 0.1194375,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 10,
+        "range": "A10:F10"
+      }
+    },
+    {
+      "id": "food-11",
+      "name": "Batata doce coz",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.006416666666666667,
+      "carbs": 0.18422333333333338,
+      "fat": 0.0008766666666666667,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 11,
+        "range": "A11:F11"
+      }
+    },
+    {
+      "id": "food-12",
+      "name": "Feijão",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.04775,
+      "carbs": 0.13591033333333333,
+      "fat": 0.005423333333333335,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 12,
+        "range": "A12:F12"
+      }
+    },
+    {
+      "id": "food-13",
+      "name": "Feijão preto",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.04479166666666667,
+      "carbs": 0.1400516666666666,
+      "fat": 0.005356666666666666,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 13,
+        "range": "A13:F13"
+      }
+    },
+    {
+      "id": "food-14",
+      "name": "Aipim",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.04,
+      "carbs": 0.032,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 14,
+        "range": "A14:F14"
+      }
+    },
+    {
+      "id": "food-15",
+      "name": "Mel de abelha",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0.8403333333333333,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 15,
+        "range": "A15:F15"
+      }
+    },
+    {
+      "id": "food-16",
+      "name": "Biscoito de arroz",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.073,
+      "carbs": 0.83,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 16,
+        "range": "A16:F16"
+      }
+    },
+    {
+      "id": "food-17",
+      "name": "Tapioca, goma crua",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0.8,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 17,
+        "range": "A17:F17"
+      }
+    },
+    {
+      "id": "food-18",
+      "name": "Cuscuz de milho, coz",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.02,
+      "carbs": 0.25,
+      "fat": 0.007,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 18,
+        "range": "A18:F18"
+      }
+    },
+    {
+      "id": "food-19",
+      "name": "Aveia",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.14,
+      "carbs": 0.666,
+      "fat": 0.01,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 19,
+        "range": "A19:F19"
+      }
+    },
+    {
+      "id": "food-20",
+      "name": "Lentilha, coz",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.063,
+      "carbs": 0.163,
+      "fat": 0.005,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 20,
+        "range": "A20:F20"
+      }
+    },
+    {
+      "id": "food-21",
+      "name": "Grão de bico, coz",
+      "unit": "g",
+      "category": "carbohydrate",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.08,
+      "carbs": 0.274,
+      "fat": 0.025,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 21,
+        "range": "A21:F21"
+      }
+    },
+    {
+      "id": "food-35",
+      "name": "Coxa frango, sem pele, coz",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.26858333333333334,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.05847333333333332,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 35,
+        "range": "A35:F35"
+      }
+    },
+    {
+      "id": "food-36",
+      "name": "Frango peito coz",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.3146875,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.0316,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 36,
+        "range": "A36:F36"
+      }
+    },
+    {
+      "id": "food-37",
+      "name": "Frango, peito grelh",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.32033333333333336,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.024836666666666667,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 37,
+        "range": "A37:F37"
+      }
+    },
+    {
+      "id": "food-38",
+      "name": "Filé de abadejo, coz",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.19345833333333332,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.009420000000000001,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 38,
+        "range": "A38:F38"
+      }
+    },
+    {
+      "id": "food-39",
+      "name": "Camarão, grande, cozido",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.18966666666666665,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.010006666666666665,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 39,
+        "range": "A39:F39"
+      }
+    },
+    {
+      "id": "food-40",
+      "name": "Merluza, filé, cru",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.16606666666666667,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.0202,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 40,
+        "range": "A40:F40"
+      }
+    },
+    {
+      "id": "food-41",
+      "name": "Merluza, filé, frito",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.26929166666666665,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.08496666666666668,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 41,
+        "range": "A41:F41"
+      }
+    },
+    {
+      "id": "food-42",
+      "name": "Merluza, filé, assado",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.2660416666666667,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.009213333333333334,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 42,
+        "range": "A42:F42"
+      }
+    },
+    {
+      "id": "food-43",
+      "name": "Salmão sem pele, grelh",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.2614166666666667,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.14532333333333333,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 43,
+        "range": "A43:F43"
+      }
+    },
+    {
+      "id": "food-44",
+      "name": "Salmão, sem pele, cru",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.19252083333333336,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.09708999999999998,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 44,
+        "range": "A44:F44"
+      }
+    },
+    {
+      "id": "food-45",
+      "name": "Acém, coz",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.2668666666666667,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.10916666666666666,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 45,
+        "range": "A45:F45"
+      }
+    },
+    {
+      "id": "food-46",
+      "name": "Coxão mole, coz",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.3238333333333333,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.08913333333333333,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 46,
+        "range": "A46:F46"
+      }
+    },
+    {
+      "id": "food-47",
+      "name": "Cupim, assado",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.2863125,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.23042666666666667,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 47,
+        "range": "A47:F47"
+      }
+    },
+    {
+      "id": "food-48",
+      "name": "Filé mingnon bov, grelh",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.32799999999999996,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.0883,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 48,
+        "range": "A48:F48"
+      }
+    },
+    {
+      "id": "food-49",
+      "name": "Maminha, grelh",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.30735416666666665,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.02422333333333333,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 49,
+        "range": "A49:F49"
+      }
+    },
+    {
+      "id": "food-50",
+      "name": "Patinho grelhado",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.359,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.07313333333333333,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 50,
+        "range": "A50:F50"
+      }
+    },
+    {
+      "id": "food-51",
+      "name": "Lombo suíno, assado",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.35725,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.06395666666666668,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 51,
+        "range": "A51:F51"
+      }
+    },
+    {
+      "id": "food-53",
+      "name": "Filé mignon suíno, assado",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.32033333333333336,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.024836666666666667,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 53,
+        "range": "A53:F53"
+      }
+    },
+    {
+      "id": "food-54",
+      "name": "Leite desnatado",
+      "unit": "ml",
+      "category": "protein",
+      "proteinAnimal": 0.0315,
+      "proteinPlant": 0,
+      "carbs": 0.047,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 54,
+        "range": "A54:F54"
+      }
+    },
+    {
+      "id": "food-55",
+      "name": "Leite integral",
+      "unit": "ml",
+      "category": "protein",
+      "proteinAnimal": 0.031,
+      "proteinPlant": 0,
+      "carbs": 0.048,
+      "fat": 0.0325,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 55,
+        "range": "A55:F55"
+      }
+    },
+    {
+      "id": "food-56",
+      "name": "Ovo",
+      "unit": "Un.",
+      "category": "protein",
+      "proteinAnimal": 6.4,
+      "proteinPlant": 0,
+      "carbs": 0.56,
+      "fat": 5.75,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 56,
+        "range": "A56:F56"
+      }
+    },
+    {
+      "id": "food-57",
+      "name": "Clara",
+      "unit": "Un.",
+      "category": "protein",
+      "proteinAnimal": 3.2,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 57,
+        "range": "A57:F57"
+      }
+    },
+    {
+      "id": "food-58",
+      "name": "Sardinha gomes da costa",
+      "unit": "lata",
+      "category": "protein",
+      "proteinAnimal": 27.5,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 9.13,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 58,
+        "range": "A58:F58"
+      }
+    },
+    {
+      "id": "food-59",
+      "name": "Queijo minas light",
+      "unit": "g",
+      "category": "protein",
+      "proteinAnimal": 0.13,
+      "proteinPlant": 0,
+      "carbs": 0.034,
+      "fat": 0.064,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 59,
+        "range": "A59:F59"
+      }
+    },
+    {
+      "id": "food-64",
+      "name": "Azeite",
+      "unit": "colher",
+      "category": "fat",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 10,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 64,
+        "range": "A64:F64"
+      }
+    },
+    {
+      "id": "food-65",
+      "name": "Linhaça, semente",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.14083867173512776,
+      "carbs": 0.4331219949315389,
+      "fat": 0.3225293333333334,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 65,
+        "range": "A65:F65"
+      }
+    },
+    {
+      "id": "food-66",
+      "name": "Castanha de caju, torrada",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.18509367332776389,
+      "carbs": 0.2913496600055695,
+      "fat": 0.46279666666666663,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 66,
+        "range": "A66:F66"
+      }
+    },
+    {
+      "id": "food-67",
+      "name": "Abacate, cru",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.012391304347826086,
+      "carbs": 0.06030869565217396,
+      "fat": 0.08396666666666666,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 67,
+        "range": "A67:F67"
+      }
+    },
+    {
+      "id": "food-68",
+      "name": "Pasta de amendoim",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.225,
+      "carbs": 0.187,
+      "fat": 0.54,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 68,
+        "range": "A68:F68"
+      }
+    },
+    {
+      "id": "food-69",
+      "name": "Gema",
+      "unit": "un.",
+      "category": "fat",
+      "proteinAnimal": 3,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 5,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 69,
+        "range": "A69:F69"
+      }
+    },
+    {
+      "id": "food-70",
+      "name": "Amendôas",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.186,
+      "carbs": 0.295,
+      "fat": 0.473,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 70,
+        "range": "A70:F70"
+      }
+    },
+    {
+      "id": "food-71",
+      "name": "Nozes",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.14,
+      "carbs": 0.184,
+      "fat": 0.594,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 71,
+        "range": "A71:F71"
+      }
+    },
+    {
+      "id": "food-72",
+      "name": "Coco ralado",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0.1,
+      "fat": 0.7,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 72,
+        "range": "A72:F72"
+      }
+    },
+    {
+      "id": "food-73",
+      "name": "Castanha do pará",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.145,
+      "carbs": 0.151,
+      "fat": 0.635,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 73,
+        "range": "A73:F73"
+      }
+    },
+    {
+      "id": "food-74",
+      "name": "Manteiga com sal",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.81,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 74,
+        "range": "A74:F74"
+      }
+    },
+    {
+      "id": "food-75",
+      "name": "Requeijão cremoso light",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0.13,
+      "proteinPlant": 0,
+      "carbs": 0.03,
+      "fat": 0.13,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 75,
+        "range": "A75:F75"
+      }
+    },
+    {
+      "id": "food-76",
+      "name": "Queijo coalho",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0.24,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.3,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 76,
+        "range": "A76:F76"
+      }
+    },
+    {
+      "id": "food-77",
+      "name": "Queijo minas",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0.05,
+      "proteinPlant": 0,
+      "carbs": 0.146,
+      "fat": 0.13,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 77,
+        "range": "A77:F77"
+      }
+    },
+    {
+      "id": "food-78",
+      "name": "Queijo ricota",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0.126005,
+      "proteinPlant": 0,
+      "carbs": 0.037861666666666675,
+      "fat": 0.08108666666666667,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 78,
+        "range": "A78:F78"
+      }
+    },
+    {
+      "id": "food-79",
+      "name": "Queijo Mussarela",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0.21,
+      "proteinPlant": 0,
+      "carbs": 0.02,
+      "fat": 0.24,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 79,
+        "range": "A79:F79"
+      }
+    },
+    {
+      "id": "food-80",
+      "name": "Coalhada",
+      "unit": "g",
+      "category": "fat",
+      "proteinAnimal": 0.034,
+      "proteinPlant": 0,
+      "carbs": 0.046,
+      "fat": 0.0325,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 80,
+        "range": "A80:F80"
+      }
+    },
+    {
+      "id": "food-88",
+      "name": "Brocolis",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.02,
+      "carbs": 0.04,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 88,
+        "range": "A88:F88"
+      }
+    },
+    {
+      "id": "food-89",
+      "name": "Porção Fruta",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0,
+      "nutritionUnknown": true,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 89,
+        "range": "A89:F89"
+      }
+    },
+    {
+      "id": "food-90",
+      "name": "Vegetais",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0,
+      "nutritionUnknown": true,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 90,
+        "range": "A90:F90"
+      }
+    },
+    {
+      "id": "food-91",
+      "name": "Paçoquita",
+      "unit": "Unidade",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 3.5,
+      "carbs": 0,
+      "fat": 5.7,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 91,
+        "range": "A91:F91"
+      }
+    },
+    {
+      "id": "food-92",
+      "name": "Jujubas",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0.069,
+      "proteinPlant": 0,
+      "carbs": 0.82,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 92,
+        "range": "A92:F92"
+      }
+    },
+    {
+      "id": "food-93",
+      "name": "Waxy Maze",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0.8,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 93,
+        "range": "A93:F93"
+      }
+    },
+    {
+      "id": "food-94",
+      "name": "Farinha Lactea",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.12,
+      "carbs": 0.78,
+      "fat": 0.06,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 94,
+        "range": "A94:F94"
+      }
+    },
+    {
+      "id": "food-95",
+      "name": "Abacaxi",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.01,
+      "carbs": 0.12,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 95,
+        "range": "A95:F95"
+      }
+    },
+    {
+      "id": "food-96",
+      "name": "Sucrilhos",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.05,
+      "carbs": 0.89,
+      "fat": 0.01,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 96,
+        "range": "A96:F96"
+      }
+    },
+    {
+      "id": "food-98",
+      "name": "Albumina",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0.75,
+      "proteinPlant": 0,
+      "carbs": 0.45,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 98,
+        "range": "A98:F98"
+      }
+    },
+    {
+      "id": "food-99",
+      "name": "Leite condensado",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0.08,
+      "proteinPlant": 0,
+      "carbs": 0.57,
+      "fat": 0.07,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 99,
+        "range": "A99:F99"
+      }
+    },
+    {
+      "id": "food-100",
+      "name": "Legumes",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0,
+      "nutritionUnknown": true,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 100,
+        "range": "A100:F100"
+      }
+    },
+    {
+      "id": "food-101",
+      "name": "Presunto",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0.14,
+      "proteinPlant": 0,
+      "carbs": 0.02,
+      "fat": 0.03,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 101,
+        "range": "A101:F101"
+      }
+    },
+    {
+      "id": "food-102",
+      "name": "Leite de soja",
+      "unit": "ml",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.025,
+      "carbs": 0.08,
+      "fat": 0.015,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 102,
+        "range": "A102:F102"
+      }
+    },
+    {
+      "id": "food-103",
+      "name": "Proteína de Soja",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.5,
+      "carbs": 0.1,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 103,
+        "range": "A103:F103"
+      }
+    },
+    {
+      "id": "food-104",
+      "name": "Canela",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0,
+      "nutritionUnknown": true,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 104,
+        "range": "A104:F104"
+      }
+    },
+    {
+      "id": "food-105",
+      "name": "Whey Vegan",
+      "unit": "Scoop",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 20,
+      "carbs": 3,
+      "fat": 1,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 105,
+        "range": "A105:F105"
+      }
+    },
+    {
+      "id": "food-106",
+      "name": "Atum",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0.26,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.06,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 106,
+        "range": "A106:F106"
+      }
+    },
+    {
+      "id": "food-107",
+      "name": "Café",
+      "unit": "ml",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 107,
+        "range": "A107:F107"
+      }
+    },
+    {
+      "id": "food-108",
+      "name": "Iogurte Natural Desnatado",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0.03834380068778992,
+      "proteinPlant": 0,
+      "carbs": 0.05773953333333329,
+      "fat": 0.003156666666666667,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 108,
+        "range": "A108:F108"
+      }
+    },
+    {
+      "id": "food-109",
+      "name": "Rosca",
+      "unit": "fatia (s)",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 4.35,
+      "carbs": 7,
+      "fat": 1.15,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 109,
+        "range": "A109:F109"
+      }
+    },
+    {
+      "id": "food-110",
+      "name": "Mamão",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.0045625,
+      "carbs": 0.10439750000000016,
+      "fat": 0.0012433333333333333,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 110,
+        "range": "A110:F110"
+      }
+    },
+    {
+      "id": "food-111",
+      "name": "Vagem",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.01786231884057971,
+      "carbs": 0.05347101449275358,
+      "fat": 0.0017333333333333335,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 111,
+        "range": "A111:F111"
+      }
+    },
+    {
+      "id": "food-112",
+      "name": "Couve",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.016666666666666666,
+      "carbs": 0.08707666666666668,
+      "fat": 0.06594,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 112,
+        "range": "A112:F112"
+      }
+    },
+    {
+      "id": "food-113",
+      "name": "Suco de uva integral",
+      "unit": "ml",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0.15,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 113,
+        "range": "A113:F113"
+      }
+    },
+    {
+      "id": "food-114",
+      "name": "Café com leite",
+      "unit": "ml",
+      "category": "extra",
+      "proteinAnimal": 0.03,
+      "proteinPlant": 0,
+      "carbs": 0.05,
+      "fat": 0.03,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 114,
+        "range": "A114:F114"
+      }
+    },
+    {
+      "id": "food-115",
+      "name": "Salada á vontade",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0,
+      "nutritionUnknown": true,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 115,
+        "range": "A115:F115"
+      }
+    },
+    {
+      "id": "food-116",
+      "name": "Whey",
+      "unit": "Scoop",
+      "category": "extra",
+      "proteinAnimal": 20,
+      "proteinPlant": 0,
+      "carbs": 3,
+      "fat": 1,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 116,
+        "range": "A116:F116"
+      }
+    },
+    {
+      "id": "food-117",
+      "name": "Banana",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0,
+      "proteinPlant": 0.02,
+      "carbs": 0.22,
+      "fat": 0,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 117,
+        "range": "A117:F117"
+      }
+    },
+    {
+      "id": "food-118",
+      "name": "Doce de leite",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0.05,
+      "proteinPlant": 0,
+      "carbs": 0.59,
+      "fat": 0.06,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 118,
+        "range": "A118:F118"
+      }
+    },
+    {
+      "id": "food-119",
+      "name": "Carne Bovina",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0.31,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.02,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 119,
+        "range": "A119:F119"
+      }
+    },
+    {
+      "id": "food-120",
+      "name": "Frango",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0.32,
+      "proteinPlant": 0,
+      "carbs": 0,
+      "fat": 0.06,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 120,
+        "range": "A120:F120"
+      }
+    },
+    {
+      "id": "food-121",
+      "name": "Bacon",
+      "unit": "g",
+      "category": "extra",
+      "proteinAnimal": 0.38,
+      "proteinPlant": 0,
+      "carbs": 0.015,
+      "fat": 0.4,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 121,
+        "range": "A121:F121"
+      }
+    },
+    {
+      "id": "food-123",
+      "name": "Barrinha Herbalife",
+      "unit": "Un.",
+      "category": "extra",
+      "proteinAnimal": 9.6,
+      "proteinPlant": 0,
+      "carbs": 14,
+      "fat": 6.3,
+      "nutritionUnknown": false,
+      "source": {
+        "sheet": "TABELA NUTRICIONAL",
+        "row": 123,
+        "range": "A123:F123"
+      }
+    }
+  ]
+}

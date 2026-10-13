@@ -29,5 +29,12 @@ export function createEnrollmentStore(dataDir) {
     fs.writeFileSync(file(uid), JSON.stringify(value), { flag: 'wx', mode: 0o600 })
     return value
   }
-  return { read, enroll }
+  const assign = (uid, slug) => {
+    if (!['masculino', 'feminino'].includes(slug)) throw new Error('invalid program')
+    const existing = read(uid)
+    const value = { programSlug: slug, startedOn: existing?.startedOn || productDate(), source: 'kiwify' }
+    fs.writeFileSync(file(uid) + '.tmp', JSON.stringify(value), { mode: 0o600 }); fs.renameSync(file(uid) + '.tmp', file(uid))
+    return value
+  }
+  return { read, enroll, assign }
 }
